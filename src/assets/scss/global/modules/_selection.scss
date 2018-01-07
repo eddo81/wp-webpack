@@ -1,0 +1,10 @@
+/**
+ * _selection.scss
+ * ===============
+ *
+ */
+
+::selection {
+  @extend %selection;
+  text-shadow: none;
+}

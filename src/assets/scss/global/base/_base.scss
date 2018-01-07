@@ -1,0 +1,304 @@
+/**
+ * _base.scss
+ * ==========
+ *
+ */
+
+* {
+  border: 0;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  text-rendering: geometricPrecision;
+
+  &:before, &:after  {
+    box-sizing: inherit;
+  }
+}
+
+html {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-family: $font-family--base;
+  box-sizing: border-box;
+  font-size: 62.5%;
+  height: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba($black-color, 0);
+
+  @include desktop() {
+    font-size: 78.125%;
+  }
+}
+
+body {
+  color: $secondary-text-color;
+  font-size: $font-size--base;
+  font-weight: $font-weight--light;
+  line-height: $baseline;
+  min-height: 100%;
+  position: relative;
+  margin: 0;
+  text-align: left;
+  background-color: $white-color;
+
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+form {
+  padding: $baseline 0;
+}
+
+caption, figcaption {
+  text-align: center;
+}
+
+em, cite, i, dt, caption, figcaption {
+  font-style: italic;
+}
+
+strong, var, b {
+  font-weight: bold;
+}
+
+pre, code, samp, kbd, small, sub, sup, caption, figcaption {
+  font-size: $font-size--sm;
+}
+
+pre, code, samp, kbd, small, sub, sup {
+  line-height: 1;
+}
+
+pre, code, samp, kbd {
+  background-color: $grey-color;
+  color: $theme-color--dark;
+  font-family: $font-family--monospace;
+}
+
+mark {
+  @extend %selection;
+}
+
+code, samp, kbd {
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: ($baseline / 6) ($baseline / 6) ($baseline / 12);
+}
+
+pre {
+  line-height: $baseline;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding: ($baseline / 2) 1rem;
+  margin: 0 0 $baseline;
+
+  code, samp, kbd {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+  text-decoration: none;
+
+  &:link, &:visited {
+    color: $link-color;
+  }
+
+  &:hover, &:focus {
+    color: $link-color--hover;
+  }
+
+  &:active {
+    color: $link-color--active;
+  }
+}
+
+[type=button], [type=submit], [type=reset], button {
+  @extend %btn;
+
+  &:link, &:visited {
+    color: $secondary-text-color;
+    text-decoration: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus, &:hover {
+    color: $secondary-text-color;
+    background-color: $grey-color;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:active {
+    background-color: $grey-color--light;
+  }
+}
+
+img, video {
+  max-width: 100%;
+  display: table;
+}
+
+hr {
+  height: ($baseline * 2);
+  margin-bottom: $baseline;
+  position: relative;
+
+  &:before {
+    background-color: $divider-color;
+    content: '';
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+  }
+}
+
+ol, ul {
+  margin-left: ($baseline - ($baseline / 6));
+  padding: 0 0 $baseline;
+}
+
+ol {
+  list-style-type: decimal;
+
+  ol {
+    padding-bottom: 0;
+  }
+}
+
+ul {
+  list-style-type: disc;
+
+  li {
+    padding-left: ($baseline / 2);
+  }
+
+  ul {
+    padding-bottom: 0;
+  }
+}
+
+dd {
+  text-indent: ($baseline - ($baseline / 6));
+}
+
+blockquote {
+  margin: 0 0 $baseline 0;
+  border-left: ($baseline / 8) solid $theme-color;
+  padding: $baseline !important;
+
+  p:last-child {
+    padding-bottom: 0;
+  }
+}
+
+figure {
+  margin: 0 auto;
+  padding-bottom: $baseline;
+
+  img {
+    display: table;
+    margin: 0 auto;
+  }
+}
+
+q {
+  quotes: "“" "”" "‘" "’";
+
+  &:before {
+    content: open-quote;
+  }
+
+  &:after {
+    content: close-quote;
+  }
+
+  & > q {
+    font-style: italic;
+  }
+}
+
+table {
+  border-radius: $border-radius--sm;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: $baseline;
+  width: 100%;
+
+  th {
+    color: $primary-text-color;
+    font-weight: $font-weight--semibold;
+    text-align: left;
+  }
+
+  th, td {
+    border-bottom: $border-width solid $divider-color;
+    padding-top: (($baseline) / 2) - $border-width;
+    padding-left: 0;
+    padding-bottom: ($baseline / 2);
+    padding-right: ($baseline / 2);
+    text-align: left;
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    @include desktop() {
+      padding-top: (($baseline) / 2) - ($border-width / 2);
+    }
+  }
+}
+
+label {
+  color: $hint-text-color;
+}
+
+input, label, select, button, textarea {
+  display: block;
+  resize: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* remove yellow from chrome auto-fill background */
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  color: $secondary-text-color;
+  -webkit-text-fill-color: $secondary-text-color;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+a, area, button, [role="button"], input:not([type="range"]), label, select, summary, textarea {
+  touch-action: manipulation;
+}
+
+[type=button][disabled], [type=submit][disabled], button[disabled] {
+  @extend %disabled;
+}
+
+template, [hidden], audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+[tabindex="-1"]:focus {
+  outline: none !important;
+}

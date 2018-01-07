@@ -1,0 +1,88 @@
+// _variables.scss
+
+
+// Baseline
+$font-size--base:            1.6rem  !default;
+$font-size--headings:        (3.6rem, 3.2rem, 2.8rem, 2.0rem, 1.8rem, $font-size--base);
+$font-size--sm:              1.2rem !default;
+$font-size--md:              1.4rem !default;
+$font-size--lg:              2rem !default;
+$baseline:                   ($font-size--base * 1.5) !default;
+
+// Border radius       
+$border-radius--sm:          0.2rem !default;
+$border-radius--lg:          100% !default;
+
+// Border width
+$border-width:               0.1rem !default;
+
+// Theme colors
+$theme-color:                #F02872 !default;
+$theme-color--light:         desaturate(lighten($theme-color, 1%), 1%) !default;
+$theme-color--dark:          saturate(darken($theme-color, 5%), 5%) !default;
+
+// Accent colors
+$accent-color:               #E91E63 !default;
+$accent-color--light:        desaturate(lighten($accent-color, 10%), 5%) !default;
+$accent-color--dark:         saturate(darken($accent-color, 5%), 5%) !default;
+
+// Link colors
+$link-color:                 #4076D4 !default;
+$link-color--hover:          saturate(darken($link-color, 25%), 50%) !default;
+$link-color--active:         desaturate(lighten($link-color, 10%), 15%) !default;
+
+// Base colors
+$black-color:                #000 !default;
+$white-color:                #FFF !default;
+
+$grey-color:                 #F5F5F5 !default;
+$grey-color--light:          #FAFAFA !default;
+$grey-color--dark:           #E0E0E0 !default;
+
+// Text colors
+$primary-text-color:         rgba($black-color, 0.87) !default;
+$secondary-text-color:       rgba($black-color, 0.54) !default;
+$hint-text-color:            rgba($black-color, 0.38) !default; 
+$divider-color:              rgba($black-color, 0.12) !default;
+
+// Font names
+$primary-font:              'Montserrat';
+$icon-font:                 'FontAwesome';
+
+// Font stacks
+$font-family--heading:      $primary-font, 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif !default;
+$font-family--base:         $primary-font, 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif !default;
+$font-family--monospace:    'Consolas', 'Monaco', 'Courier New', monospace !default;
+$font-family-system:        'system-ui', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif !default;
+$font-family--icon:         $icon-font !default;
+
+// Weights
+$font-weight--light:        300 !default;
+$font-weight--normal:       400 !default;
+$font-weight--semibold:     500 !default;
+$font-weight--bold:         700 !default;
+
+// Breakpoints
+$screen--xs:                0px !default;
+$screen--sm:                576px !default;
+$screen--md:                768px !default;
+$screen--lg:                992px !default;
+$screen--xl:                1200px !default;
+
+// Durations
+$duration--short:           300ms !default;
+$duration--medium:          600ms !default;
+$duration--long:            900ms !default;
+
+// Grid
+$grid-columns:              12 !default;
+$grid-gutter-width:         $baseline !default;
+
+// Container max-widths
+$container--sm:             540px !default;
+$container--md:             720px !default;
+$container--lg:             960px !default;
+$container--xl:             1140px !default;
+
+// Control variables
+$use-desktop-mixin:        true;

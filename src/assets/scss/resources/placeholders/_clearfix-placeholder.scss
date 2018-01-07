@@ -1,0 +1,9 @@
+/**
+ * _clearfix-placeholder.scss
+ * ==========================
+ *
+ */
+
+%clearfix {
+  @include clearfix();
+}

@@ -1,0 +1,53 @@
+/**
+ * style.scss
+ * ==========
+ *
+ * This file serves as the scss entry-point for the application
+ * and it should therefore only contain @import statements.
+ *
+ */
+
+@charset 'UTF-8';
+
+// Variables imports.
+@import "./resources/variables/_variables.scss";
+
+// Functions imports.
+@import "./resources/functions/_base64svg-function.scss";
+@import "./resources/functions/_typecasting-function.scss";
+@import "./resources/functions/_easing-function.scss";
+@import "./resources/functions/_breakpoint-function.scss";
+@import "./resources/functions/_duration-function.scss";
+@import "./resources/functions/_zindex-function.scss";
+
+// Mixins imports.
+@import "./resources/mixins/_clearfix-mixin.scss";
+@import "./resources/mixins/_desktop-mixin.scss";
+@import "./resources/mixins/_ie-mixin.scss";
+@import "./resources/mixins/_pattern-mixin.scss";
+@import "./resources/mixins/_shadow-mixin.scss";
+@import "./resources/mixins/_truncate-mixin.scss";
+
+// Placeholder imports.
+@import "./resources/placeholders/_button-placeholder.scss";
+@import "./resources/placeholders/_clearfix-placeholder.scss";
+@import "./resources/placeholders/_disabled-placeholder.scss";
+@import "./resources/placeholders/_heading-placeholder.scss";
+@import "./resources/placeholders/_radio_checkbox-placeholder.scss";
+@import "./resources/placeholders/_textfield_select-placeholder.scss";
+@import "./resources/placeholders/_selection-placeholder.scss";
+@import "./resources/placeholders/_truncate-placeholder.scss";
+@import "./resources/placeholders/_vertical-rhythm-placeholder.scss";
+
+// Base imports.
+@import "./global/base/_base.scss";
+@import "./global/base/_typography.scss";
+@import "./global/base/_font-face.scss";
+@import "./global/utilities/_utilities.scss";
+
+// Modules imports.
+@import "./global/modules/_selection.scss";
+@import "./global/modules/_buttons.scss";
+@import "./global/modules/_lists.scss";
+@import "./global/modules/_grid.scss";
+@import "./global/modules/_links.scss";

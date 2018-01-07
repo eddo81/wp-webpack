@@ -1,0 +1,51 @@
+<template>
+  <label class="textarea" v-if="name && label" :for="id ? id : null">
+    <textarea :id="id ? id : null" :name="name" :placeholder="placeholder ? placeholder : null" :disabled="disabled ? disabled : null"></textarea>
+    <span class="textarea__label">{{label}}</span>
+  </label>
+</template>
+
+<script>
+  export default {
+    name: 'v-textarea',
+    data () {
+      return { };
+    },
+    props: {
+      id:          { type: String, default: "" }, 
+      name:        { type: String, required: true },  
+      label:       { type: String, required: true },
+      placeholder: { type: String, default: "" },
+      disabled:    { type: Boolean, default: false } 
+    }
+  };
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+
+  .textarea {
+    @extend %textfield-select__container;
+
+    textarea {
+      @extend %textfield-select__shape;
+      @extend %textarea__height;    
+    }
+    
+    .textarea__label {
+      @extend %textfield-select__label;
+    }
+
+    *:focus {
+      @extend %textfield-select__focus;
+    }
+    
+    [disabled] {
+      @extend %disabled;
+
+      & + * {
+        @extend %disabled;
+      }
+    }
+  }
+</style>

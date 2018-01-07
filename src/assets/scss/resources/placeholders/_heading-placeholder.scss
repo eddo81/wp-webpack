@@ -1,0 +1,15 @@
+/**
+ * _heading-placeholder.scss
+ * =========================
+ *
+ */
+
+%heading {
+  font-weight: $font-weight--semibold;
+  color: $primary-text-color;
+}
+
+%heading--sm {
+  line-height: ($baseline * 2);
+  padding: ($font-size--base / 2) 0 $font-size--base;
+}

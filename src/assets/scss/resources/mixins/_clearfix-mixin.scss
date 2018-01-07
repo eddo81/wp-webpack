@@ -1,0 +1,22 @@
+/**
+ * _clearfix-mixin.scss
+ * ====================
+ *
+ */
+
+@mixin clearfix() {
+  
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+
+  @supports (display: flow-root) {
+    display: flow-root;
+
+    &:after {
+      content: normal;
+    }
+  }
+}

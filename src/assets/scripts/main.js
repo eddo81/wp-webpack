@@ -2,8 +2,6 @@
 import Style      from 'assets/scss/style.scss';
 import Vue        from 'vue';
 import App        from '@/App.vue';
-import Router     from '@/router/router.js';
-import Store      from '@/store/store.js';
 
 Vue.config.productionTip = false;
 
@@ -17,7 +15,5 @@ Vue.component('v-textarea', () => import(/* webpackChunkName: "component-textare
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router: Router,
-  store: Store,
   render: h => h(App)
 });

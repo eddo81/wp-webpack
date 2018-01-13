@@ -7,7 +7,6 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
@@ -73,15 +72,6 @@ let webpackConfig = merge(baseWebpackConfig, {
       fileName: _CONFIG.filenames.entry.manifest,
       basePath: '',
       seed: _SEED
-    }),
-
-    // service worker caching
-    new SWPrecacheWebpackPlugin({
-      cacheId: _CONFIG.package.name.replace(/\s/g, '-'),
-      filename: _CONFIG.filenames.output.serviceworker,
-      staticFileGlobs: [`${_CONFIG.directories.output.public}/**/*.{js,html,css,woff,woff2,ttf,webp,png,jpg,jpeg,gif,svg,ico}`],
-      minify: true,
-      stripPrefix: `${_CONFIG.directories.output.public}/`
     }),
 
     new CompressionWebpackPlugin({

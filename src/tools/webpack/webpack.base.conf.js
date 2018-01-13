@@ -94,8 +94,7 @@ module.exports = {
         removeAttributeQuotes: true
       },
       chunksSortMode: 'dependency',
-      config: _CONFIG,
-      serviceWorkerLoader: `<script id="serviceworkerloader">(function(){'use strict'; ${(_CONFIG.env.debug === true)?'':'var swEntry = "'+_CONFIG.filenames.output.serviceworker+'";'}${fs.readFileSync(_CONFIG.resolve(_CONFIG.directories.entry.serviceworker + _CONFIG.filenames.entry.serviceworker), 'utf-8')}})();</script>`
+      config: _CONFIG
     })
   ]
 };

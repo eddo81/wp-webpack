@@ -6,7 +6,7 @@ const _CONFIG = require('./config');
 const webpackConfig = require('./webpack/webpack.prod.conf');
 const utils = require('./utils/utils.js');
 
-console.log(utils.color.cyan('building for production...'));
+console.log('building for production...');
 
 rm(_CONFIG.resolve(_CONFIG.directories.output.public), err => {
 
@@ -28,11 +28,8 @@ rm(_CONFIG.resolve(_CONFIG.directories.output.public), err => {
       chunkModules: false
     }) + '\n\n');
 
-    console.log(utils.color.cyan('  Build complete.\n'));
+    console.log('  Build complete.\n');
 
-    console.log(utils.color.yellow(
-      '  Tip: built files are meant to be served over an HTTP server.\n' +
-      '  Opening index.html over file:// won\'t work.\n'
-    ));
+    console.log('  Tip: built files are meant to be served over an HTTP server.\n' + '  Opening index.html over file:// won\'t work.\n');
   });
 })

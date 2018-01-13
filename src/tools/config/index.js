@@ -20,7 +20,6 @@ const _DIRECTORIES = {
     this.assets             = `${this.src}assets/`;
 
     // Tools
-    this.serviceworker      = `${this.tools}serviceworker/`;
     this.server             = `${this.tools}server/`;
 
     // Assets
@@ -55,7 +54,6 @@ const _FILENAMES = {
   entry: new function() {
     this.js                 = `main.js`;
     this.html               = `index.html`;
-    this.serviceworker      = `service-worker-${(_ENV.debug === true) ? 'dev' : 'prod'}.js`;
     this.manifest           = `manifest.json`;
     this.scss               = `style.scss`;
   },
@@ -64,7 +62,6 @@ const _FILENAMES = {
     this.js                 = `bundle.js`;
     this.html               = `index.html`;
     this.css                = `style.css`;
-    this.serviceworker      = `service-worker.js`;
   }
 };
 

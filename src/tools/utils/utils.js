@@ -70,30 +70,3 @@ exports.styleLoaders = function (options) {
 
   return output;
 };
-
-exports.color = {
-    black(message = '') {
-      return '\x1b[30m' + message + '\x1b[39m';
-    },
-    red(message = '') {
-      return '\x1b[31m' + message + '\x1b[39m';
-    },
-    green(message = '') {
-      return '\x1b[32m' + message + '\x1b[39m';
-    },
-    yellow(message = '') {
-      return '\x1b[33m' + message + '\x1b[39m';
-    },
-    blue(message = '') {
-      return '\x1b[34m' + message + '\x1b[39m';
-    },
-    magenta(message = '') {
-      return '\x1b[35m' + message + '\x1b[39m';
-    },
-    cyan(message = '') {
-      return '\x1b[36m' + message + '\x1b[39m';
-    },
-    white(message = '') {
-      return '\x1b[37m' + message + '\x1b[39m';
-    }
-};

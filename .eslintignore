@@ -1,3 +1,2 @@
 src/tools/*.js
 src/tools/config/*.js
-src/tools/serviceworker/*.js

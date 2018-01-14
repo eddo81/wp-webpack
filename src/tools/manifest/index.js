@@ -16,7 +16,7 @@ const _SEED = {
       type: 'image/png'
     }
   ],
-  start_url: _CONFIG.filenames.output.html,
+  start_url: "/",
   display: 'standalone',
   orientation: 'portrait',
   background_color: '#000000',

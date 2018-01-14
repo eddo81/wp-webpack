@@ -16,8 +16,8 @@ let webpackConfig = merge(baseWebpackConfig, {
 
   output: {
     path: `${_CONFIG.directories.root + _CONFIG.directories.output.public}`,
-    filename: `${_CONFIG.directories.output.js}[name].[chunkhash].js`,
-    chunkFilename: `${_CONFIG.directories.output.js}[name]_[id].[chunkhash].js`
+    filename: `${_CONFIG.directories.output.js}[name].js?id=[chunkhash]`,
+    chunkFilename: `${_CONFIG.directories.output.js}[name]_[id].js?id=[chunkhash]`
   },
 
   plugins: [
@@ -31,7 +31,7 @@ let webpackConfig = merge(baseWebpackConfig, {
 
     // extract css into its own file
     new ExtractTextPlugin({
-      filename: `${_CONFIG.directories.output.css}[name].[contenthash].css`
+      filename: `${_CONFIG.directories.output.css}[name].css?id=[contenthash]`
     }),
 
     // Compress extracted CSS. We are using this plugin so that possible

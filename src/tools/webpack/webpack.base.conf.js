@@ -2,7 +2,6 @@ const fs = require('fs');
 const utils = require('../utils/utils');
 const _CONFIG = require('../config');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -81,20 +80,7 @@ module.exports = {
   plugins: [
 
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: _CONFIG.env.mode, CONFIG: JSON.stringify(require('../config').prod) }
-    }),
-
-    /*new HtmlWebpackPlugin({
-      filename: `${(_CONFIG.env.debug === true) ? '' : _CONFIG.resolve(_CONFIG.directories.output.public + '/')}` + _CONFIG.filenames.output.html,
-      template: `${_CONFIG.directories.entry.src + _CONFIG.filenames.entry.html}`,
-      inject: true,
-      minify: (_CONFIG.env.debug === true) ? undefined : {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      },
-      chunksSortMode: 'dependency',
-      config: _CONFIG
-    })*/
+      'process.env': { NODE_ENV: _CONFIG.env.mode }
+    })
   ]
 };

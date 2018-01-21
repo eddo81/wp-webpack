@@ -4,7 +4,6 @@ const rm = require('rimraf');
 const webpack = require('webpack');
 const _CONFIG = require('./config');
 const webpackConfig = require('./webpack/webpack.prod.conf');
-const utils = require('./utils/utils.js');
 
 console.log('building for production...');
 

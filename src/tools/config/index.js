@@ -1,5 +1,6 @@
 const fs        = require('fs');
 const _PATH     = require('path');
+const _IMGSIZE  = require('image-size');
 const _ROOT     = `${_PATH.resolve(_PATH.join(__dirname, '../../../'))}/`;
 const _PKG      = require(`${_ROOT}package.json`);
 const _APPNAME  = '' || (_PKG.name.charAt(0).toUpperCase() + _PKG.name.slice(1)).trim();
@@ -29,6 +30,7 @@ const _DIRECTORIES = {
     this.fonts              = `${this.assets}fonts/`;
     this.scripts            = `${this.assets}scripts/`;
     this.scss               = `${this.assets}scss/`;
+    this.icons              = `${this.static}img/icons/`;
 
     // SCSS Resources
     this.resources          = `${this.scss}resources/`;
@@ -80,7 +82,26 @@ const _EXTENSIONS = {
 const _SERVER = {
   port: 8080,
   autoOpenBrowser: true,
-  proxyTable: {}
+  proxyTable: {
+    '*': {
+      target: 'http://localhost/wordpress/'
+    }
+  }
+};
+
+const _MANIFEST = {
+  name: _APPNAME,
+  short_name: _APPNAME,
+  description: _PKG.description,
+  icons: [].concat(...[
+    `./${_DIRECTORIES.entry.icons}`
+  ].filter(directory => fs.existsSync(directory)).map(directory => fs.readdirSync(directory).filter(icon => { return _PATH.extname(icon).match(_EXTENSIONS.images)}) )
+  ).map(icon => { const dimentions = _IMGSIZE(_DIRECTORIES.entry.icons + icon); return  {src: _DIRECTORIES.output.icons + icon, sizes: `${dimentions.width}x${dimentions.height}`, type: `image/${_PATH.extname(icon).replace(/\W*/, '')}`}; }),
+  start_url: "/",
+  display: 'standalone',
+  orientation: 'portrait',
+  background_color: '#000000',
+  theme_color: '#FFFFFF'
 };
 
 const _CONFIG = {
@@ -90,6 +111,7 @@ const _CONFIG = {
   filenames:    _FILENAMES,
   extensions:   _EXTENSIONS,
   package:      _PKG,
+  manifest:     _MANIFEST,
   server:       _SERVER,
   resources: [].concat(...[
       `./${_DIRECTORIES.entry.scss_variables}`,

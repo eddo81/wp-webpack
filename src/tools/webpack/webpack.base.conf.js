@@ -84,7 +84,7 @@ module.exports = {
       'process.env': { NODE_ENV: _CONFIG.env.mode, CONFIG: JSON.stringify(require('../config').prod) }
     }),
 
-    new HtmlWebpackPlugin({
+    /*new HtmlWebpackPlugin({
       filename: `${(_CONFIG.env.debug === true) ? '' : _CONFIG.resolve(_CONFIG.directories.output.public + '/')}` + _CONFIG.filenames.output.html,
       template: `${_CONFIG.directories.entry.src + _CONFIG.filenames.entry.html}`,
       inject: true,
@@ -95,6 +95,6 @@ module.exports = {
       },
       chunksSortMode: 'dependency',
       config: _CONFIG
-    })
+    })*/
   ]
 };

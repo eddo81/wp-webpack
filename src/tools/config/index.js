@@ -82,11 +82,7 @@ const _EXTENSIONS = {
 const _SERVER = {
   port: 8080,
   autoOpenBrowser: true,
-  proxyTable: {
-    '*': {
-      target: 'http://localhost/wordpress/'
-    }
-  }
+  proxyTable: {}
 };
 
 const _MANIFEST = {
@@ -127,4 +123,3 @@ const _CONFIG = {
 };
 
 module.exports = _CONFIG;
-module.exports.prod = {appname: _APPNAME, env: _ENV, filenames: _FILENAMES.output};

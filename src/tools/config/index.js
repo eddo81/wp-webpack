@@ -1,9 +1,7 @@
 const fs        = require('fs');
 const _PATH     = require('path');
-const _IMGSIZE  = require('image-size');
 const _ROOT     = `${_PATH.resolve(_PATH.join(__dirname, '../../../'))}/`;
 const _PKG      = require(`${_ROOT}package.json`);
-const _APPNAME  = '' || (_PKG.name.charAt(0).toUpperCase() + _PKG.name.slice(1)).trim();
 const _ENV      = new function() {
     this.debug  = ((process.env.NODE_ENV || 'development').trim().toLowerCase() !== 'production') ? true : false;
     this.mode   = (this.debug === true) ? '"development"' : '"production"';
@@ -85,29 +83,21 @@ const _SERVER = {
   proxyTable: {}
 };
 
-const _MANIFEST = {
-  name: _APPNAME,
-  short_name: _APPNAME,
-  description: _PKG.description,
-  icons: [].concat(...[
-    `./${_DIRECTORIES.entry.icons}`
-  ].filter(directory => fs.existsSync(directory)).map(directory => fs.readdirSync(directory).filter(icon => { return _PATH.extname(icon).match(_EXTENSIONS.images)}) )
-  ).map(icon => { const dimentions = _IMGSIZE(_DIRECTORIES.entry.icons + icon); return  {src: _DIRECTORIES.output.icons + icon, sizes: `${dimentions.width}x${dimentions.height}`, type: `image/${_PATH.extname(icon).replace(/\W*/, '')}`}; }),
-  start_url: "/",
-  display: 'standalone',
-  orientation: 'portrait',
-  background_color: '#000000',
-  theme_color: '#FFFFFF'
+const _APP = new function() {
+  this.name = '' || (_PKG.name.charAt(0).toUpperCase() + _PKG.name.slice(1)).trim();
+  this.short_name = '' || this.name;
+  this.description = '' || _PKG.description;
+  this.background_color = '#000000';
+  this.theme_color = '#FFFFFF';
 };
 
 const _CONFIG = {
-  appname:      _APPNAME,
+  app:          _APP,
   env:          _ENV,
   directories:  _DIRECTORIES,
   filenames:    _FILENAMES,
   extensions:   _EXTENSIONS,
   package:      _PKG,
-  manifest:     _MANIFEST,
   server:       _SERVER,
   resources: [].concat(...[
       `./${_DIRECTORIES.entry.scss_variables}`,

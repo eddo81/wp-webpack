@@ -70,7 +70,17 @@ let webpackConfig = merge(baseWebpackConfig, {
     new ManifestPlugin({
       fileName: _CONFIG.filenames.entry.manifest,
       basePath: '',
-      seed: _CONFIG.manifest
+      seed: {
+        name: _CONFIG.app.name,
+        short_name: _CONFIG.app.short_name,
+        description: _CONFIG.app.description,
+        icons: require('../utils/get-icon-paths.js')(_CONFIG),
+        start_url: "/",
+        display: 'standalone',
+        orientation: 'portrait',
+        background_color: _CONFIG.app.background_color,
+        theme_color:  _CONFIG.app.theme_color
+      }
     }),
 
     new CompressionWebpackPlugin({

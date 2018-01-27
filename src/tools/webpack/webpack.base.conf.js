@@ -7,10 +7,12 @@ module.exports = {
   entry: {
     app: `./${_CONFIG.directories.entry.scripts + _CONFIG.filenames.entry.js}`
   },
+
   output: {
     path: _CONFIG.resolve(_CONFIG.directories.output.public),
     filename: '[name].js'
   },
+
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
@@ -19,7 +21,11 @@ module.exports = {
       'assets': _CONFIG.resolve(_CONFIG.directories.entry.assets)
     }
   },
+
   devtool: (_CONFIG.env.debug) ? '#cheap-module-eval-source-map' : '#source-map',
+
+  watch: _CONFIG.env.debug,
+
   module: {
     rules: [
       {
@@ -31,6 +37,7 @@ module.exports = {
           formatter: require('eslint-friendly-formatter')
         }
       },
+
       {
         test: _CONFIG.extensions.vue,
         loader: 'vue-loader',
@@ -45,12 +52,14 @@ module.exports = {
           }
         }
       },
+
       {
         test: _CONFIG.extensions.js,
         exclude: /node_modules/,
         loader: 'babel-loader',
         include: [_CONFIG.resolve(_CONFIG.directories.entry.framework), _CONFIG.resolve(_CONFIG.directories.entry.scripts)]
       },
+
       {
         test: _CONFIG.extensions.images,
         loader: 'url-loader',
@@ -59,6 +68,7 @@ module.exports = {
           name: `${_CONFIG.directories.output.images}[name].[hash:7].[ext]`
         }
       },
+
       {
         test: _CONFIG.extensions.media,
         loader: 'url-loader',
@@ -67,6 +77,7 @@ module.exports = {
           name: `${_CONFIG.directories.output.media}[name].[hash:7].[ext]`
         }
       },
+
       {
         test: _CONFIG.extensions.fonts,
         loader: 'url-loader',
@@ -77,8 +88,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [
 
+  plugins: [
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: _CONFIG.env.mode }
     })

@@ -66,21 +66,23 @@ const _FILENAMES = {
 };
 
 const _EXTENSIONS = {
-  eslint: /\.(js|es6|vue)$/i,
-  js:     /\.(js|es6)$/i,
-  vue:    /\.vue$/i,
-  scss:   /\.s[a|c]ss$/i,
-  text:   /\.(xml|txt)(\?.*)?$/i,
-  images: /\.(png|jpe?g|gif|svg|tiff|bmp|ico)(\?.*)?$/i,
-  media:  /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i,
-  fonts:  /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
-  html:   /\.html$/i
+  eslint:   /\.(js|es6|vue)$/i,
+  js:       /\.(js|es6)$/i,
+  vue:      /\.vue$/i,
+  scss:     /\.s[a|c]ss$/i,
+  text:     /\.(xml|txt)(\?.*)?$/i,
+  images:   /\.(png|jpe?g|gif|svg|tiff|bmp|ico)(\?.*)?$/i,
+  media:    /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i,
+  fonts:    /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+  html:     /\.html$/i
 };
 
 const _SERVER = {
-  port: 8080,
-  autoOpenBrowser: true,
-  proxyTable: {}
+  port: process.env.PORT || 8181,
+  host: 'localhost',
+  url: 'http://localhost',
+  target: 'http://localhost/wordpress/', //added
+  autoOpenBrowser: true
 };
 
 const _APP = new function() {

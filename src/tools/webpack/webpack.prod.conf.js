@@ -7,7 +7,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 
 let webpackConfig = merge(baseWebpackConfig, {
 
@@ -15,8 +14,8 @@ let webpackConfig = merge(baseWebpackConfig, {
 
   output: {
     path: `${_CONFIG.directories.root + _CONFIG.directories.output.public}`,
-    filename: `${_CONFIG.directories.output.js}[name].js?id=[chunkhash]`,
-    chunkFilename: `${_CONFIG.directories.output.js}[name]_[id].js?id=[chunkhash]`
+    filename: `${_CONFIG.directories.output.js}[name].[chunkhash].js`,
+    chunkFilename: `${_CONFIG.directories.output.js}[name]_[id].[chunkhash].js`
   },
 
   plugins: [
@@ -65,23 +64,6 @@ let webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-
-    // add manifest.json
-    new ManifestPlugin({
-      fileName: _CONFIG.filenames.entry.manifest,
-      basePath: '',
-      seed: {
-        name: _CONFIG.app.name,
-        short_name: _CONFIG.app.short_name,
-        description: _CONFIG.app.description,
-        icons: require('../utils/get-icon-paths.js')(_CONFIG),
-        start_url: "/",
-        display: 'standalone',
-        orientation: 'portrait',
-        background_color: _CONFIG.app.background_color,
-        theme_color:  _CONFIG.app.theme_color
-      }
-    }),
 
     new CompressionWebpackPlugin({
       asset: '[path].gz[query]',

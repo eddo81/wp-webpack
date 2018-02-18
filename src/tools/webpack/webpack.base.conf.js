@@ -2,6 +2,7 @@ const fs = require('fs');
 const utils = require('../utils/utils');
 const _CONFIG = require('../config');
 const webpack = require('webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
   entry: {
@@ -92,6 +93,21 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: _CONFIG.env.mode }
+    }),
+    new ManifestPlugin({ // add manifest.json
+      fileName: _CONFIG.filenames.entry.manifest,
+      basePath: '',
+      seed: {
+        name: _CONFIG.app.name,
+        short_name: _CONFIG.app.short_name,
+        description: _CONFIG.app.description,
+        icons: require('../utils/get-icon-paths.js')(_CONFIG),
+        start_url: "/",
+        display: 'standalone',
+        orientation: 'portrait',
+        background_color: _CONFIG.app.background_color,
+        theme_color:  _CONFIG.app.theme_color,
+      }
     })
   ]
 };

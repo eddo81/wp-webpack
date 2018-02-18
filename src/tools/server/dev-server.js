@@ -13,11 +13,9 @@ var webpackConfig = require('../webpack/webpack.dev.conf');
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || _CONFIG.server.port;
+
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!_CONFIG.server.autoOpenBrowser;
-// Define HTTP proxies to your custom API backend
-// https://github.com/chimurai/http-proxy-middleware
-var proxyTable = _CONFIG.server.proxyTable;
 
 var app = express();
 var compiler = webpack(webpackConfig);
@@ -39,17 +37,6 @@ compiler.plugin('compilation', function (compilation) {
   });
 });
 
-// proxy api requests
-Object.keys(proxyTable).forEach(function (context) {
-  var options = proxyTable[context];
-
-  if (typeof options === 'string') {
-    options = { target: options };
-  }
-
-  app.use(proxyMiddleware(options.filter || context, options));
-})
-
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')());
 
@@ -63,7 +50,7 @@ app.use(hotMiddleware);
 // serve pure static assets
 app.use('/', express.static(`./${_CONFIG.directories.entry.static.replace(/\/$/,'')}`));
 
-var uri = 'http://localhost:' + port;
+var uri = _CONFIG.server.url + ':' + port;
 
 var _resolve;
 var readyPromise = new Promise(resolve => {

@@ -12,9 +12,9 @@
       return { };
     },
     props: {
-      id:      { type: String, default: "" }, 
-      name:    { type: String, required: true }, 
-      value:   { type: String, required: true }, 
+      id:      { type: String, default: "" },
+      name:    { type: String, required: true },
+      value:   { type: String, required: true },
       label:   { type: String, required: true },
       checked: { type: Boolean, default: false }
     }
@@ -26,7 +26,7 @@
 
   .checkbox {
     @extend %radio-checkbox__container;
-    
+
     &:before {
       border-radius: $border-radius--sm;
     }
@@ -37,16 +37,16 @@
       &:after {
         border-radius: $border-radius--sm;
         @extend %radio-checkbox__shape;
-      }    
+      }
     }
 
     input[type=checkbox] {
       @extend %radio-checkbox__input;
-      
+
       &:checked {
-        
+
         + .checkbox__label {
-          
+
           &:before {
             transform: scale3d(1, 1, 1);
           }
@@ -56,7 +56,7 @@
       &:focus {
 
         + .checkbox__label {
-          
+
           &:after {
             @extend %radio-checkbox__focus;
           }
@@ -64,7 +64,7 @@
       }
 
       + .checkbox__label {
-        
+
         &:before {
           @extend %radio-checkbox__checkmark;
           transform: scale3d(0, 0, 0);

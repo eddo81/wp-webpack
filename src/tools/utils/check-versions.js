@@ -1,7 +1,7 @@
-const semver = require('semver');
+const semver  = require('semver');
 const _CONFIG = require('../config');
-const utils = require('./utils.js');
-const shell = require('shelljs')
+const utils   = require('./utils.js');
+const shell   = require('shelljs')
 
 function exec (cmd) {
   return require('child_process').execSync(cmd).toString().trim();

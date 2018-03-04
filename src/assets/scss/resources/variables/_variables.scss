@@ -9,7 +9,7 @@ $font-size--md:              1.4rem !default;
 $font-size--lg:              2rem !default;
 $baseline:                   ($font-size--base * 1.5) !default;
 
-// Border radius       
+// Border radius
 $border-radius--sm:          0.2rem !default;
 $border-radius--lg:          100% !default;
 
@@ -17,7 +17,7 @@ $border-radius--lg:          100% !default;
 $border-width:               0.1rem !default;
 
 // Theme colors
-$theme-color:                #F02872 !default;
+$theme-color:               #F02872 !default;
 $theme-color--light:         desaturate(lighten($theme-color, 1%), 1%) !default;
 $theme-color--dark:          saturate(darken($theme-color, 5%), 5%) !default;
 
@@ -42,7 +42,7 @@ $grey-color--dark:           #E0E0E0 !default;
 // Text colors
 $primary-text-color:         rgba($black-color, 0.87) !default;
 $secondary-text-color:       rgba($black-color, 0.54) !default;
-$hint-text-color:            rgba($black-color, 0.38) !default; 
+$hint-text-color:            rgba($black-color, 0.38) !default;
 $divider-color:              rgba($black-color, 0.12) !default;
 
 // Font names

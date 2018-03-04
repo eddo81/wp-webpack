@@ -1,6 +1,7 @@
 const fs = require('fs');
 const utils = require('../utils/utils');
 const _CONFIG = require('../config');
+const icons = require('../utils/get-icon-paths.js');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
@@ -101,7 +102,7 @@ module.exports = {
         name: _CONFIG.app.name,
         short_name: _CONFIG.app.short_name,
         description: _CONFIG.app.description,
-        icons: require('../utils/get-icon-paths.js')(_CONFIG),
+        icons: icons,
         start_url: "/",
         display: 'standalone',
         orientation: 'portrait',

@@ -5,20 +5,19 @@ function load_theme_scripts() {
 
   $uri = get_template_directory_uri() . '/public/';
   $assets = get_asset_from_manifest();
+  $script_keys = [
+    'manifest.js',
+    'vendor.js',
+    'app.js'
+  ];
 
-  if($assets['manifest.js']) {
-    wp_enqueue_script('manifest', $uri . $assets['manifest.js'], null, null, true);
+  foreach($script_keys as $key) {
+    if(array_key_exists($key, $assets)) {
+      wp_enqueue_script($key, $uri . $assets[$key], null, null, true);
+    }
   }
 
-  if($assets['vendor.js']) {
-    wp_enqueue_script('vendor', $uri . $assets['vendor.js'], null, null, true);
-  }
-
-  if($assets['app.js']) {
-    wp_enqueue_script('app', $uri . $assets['app.js'], null, null, true);
-  }
-
-  if($assets['app.css']) {
+  if(array_key_exists('app.css', $assets)) {
     wp_enqueue_style('style', $uri . $assets['app.css'], false, null);
   }
 

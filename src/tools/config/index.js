@@ -56,6 +56,7 @@ const _FILENAMES = {
     this.html               = `index.html`;
     this.manifest           = `manifest.json`;
     this.scss               = `style.scss`;
+    this.webpack_config     = `webpack.${(_ENV.debug) ? 'dev' : 'prod' }.conf.js`;
   },
 
   output: new function() {
@@ -77,20 +78,20 @@ const _EXTENSIONS = {
   html:     /\.html$/i
 };
 
-const _SERVER = {
-  port: process.env.PORT || 8181,
-  host: 'localhost',
-  url: 'http://localhost',
-  target: 'http://localhost/wordpress/', //added
-  autoOpenBrowser: true
+const _APP = new function() {
+  this.name             = '' || (_PKG.name.charAt(0).toUpperCase() + _PKG.name.slice(1)).trim();
+  this.short_name       = '' || this.name;
+  this.description      = '' || _PKG.description;
+  this.background_color = '#000000';
+  this.theme_color      = '#FFFFFF';
 };
 
-const _APP = new function() {
-  this.name = '' || (_PKG.name.charAt(0).toUpperCase() + _PKG.name.slice(1)).trim();
-  this.short_name = '' || this.name;
-  this.description = '' || _PKG.description;
-  this.background_color = '#000000';
-  this.theme_color = '#FFFFFF';
+const _SERVER = new function() {
+  this.autoOpenBrowser = true;
+  this.port            = process.env.PORT || 8181;
+  this.target          = `http://localhost/wordpress/`; //devurl
+  this.proxy           = `http://localhost:${this.port}`;
+  this.public_path     = `${this.proxy}/wordpress/wp-content/themes/wp-webpack/${_DIRECTORIES.output.public}`; // Path to theme root (/wp-content/themes/my-theme/)
 };
 
 const _CONFIG = {

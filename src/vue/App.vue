@@ -3,7 +3,7 @@
     <header class="ta-center container--lg">
       <a href="javascript:;" class="js-grid-toggle grid-toggle link__underline">Toggle Gridlines</a>
       <h1>
-        Cutestrapp
+        Cutestrap
       </h1>
       <p>A sassy, opinionated CSS Framework. A tiny alternative to Bootstrap.</p>
       <p>

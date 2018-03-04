@@ -5,7 +5,6 @@ const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const BrowserSyncPlugin = require('browsersync-webpack-plugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -21,7 +20,8 @@ let webpackConfig = merge(baseWebpackConfig, {
 
   output: {
     chunkFilename: `[name].js`,
-    publicPath: 'http://localhost/wordpress/wp-content/themes/vue-template/public/'
+    pathinfo: true,
+    publicPath: _CONFIG.server.public_path
   },
 
   plugins: [
@@ -33,13 +33,15 @@ let webpackConfig = merge(baseWebpackConfig, {
     new BrowserSyncPlugin({
       target: _CONFIG.server.target,
       open: _CONFIG.server.autoOpenBrowser,
-      host: 'localhost',
-      port: _CONFIG.server.port,
-      //proxyUrl: _CONFIG.server.url + ':' + _CONFIG.server.port,
-      watch: [],
-      delay: 500,
-    }),
-    new WriteFilePlugin()
+      proxyUrl: _CONFIG.server.proxy,
+      watch: ['**/*.php'],
+      injectChanges: true,
+      logFileChanges: true,
+      logLevel: 'debug',
+      logPrefix: 'wepback',
+      notify: false,
+      reloadDelay: 0
+    })
   ]
 });
 

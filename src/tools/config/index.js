@@ -109,7 +109,6 @@ const _CONFIG = {
       `./${_DIRECTORIES.entry.scss_placeholders}`
     ].filter(resource => fs.existsSync(resource)).map(path => fs.readdirSync(path).map(filename => path + filename))
   ),
-
   resolve: function(dir) {
     return _PATH.join(_DIRECTORIES.root, dir);
   }

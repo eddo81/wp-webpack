@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
     path: _CONFIG.resolve(_CONFIG.directories.output.public),
-    filename: '[name].js'
+    filename: `${_CONFIG.directories.output.js}[name].js`
   },
 
   resolve: {
@@ -26,7 +26,7 @@ module.exports = {
 
   devtool: (_CONFIG.env.debug) ? '#cheap-module-eval-source-map' : '#source-map',
 
-  watch: _CONFIG.env.debug,
+  watch: (_CONFIG.env.debug),
 
   module: {
     rules: [
@@ -45,7 +45,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: utils.cssLoaders({
-            sourceMap: (_CONFIG.env.debug) ? false : true,
+            sourceMap: (!_CONFIG.env.debug),
             extract: (!_CONFIG.env.debug)
           }),
           transformToRequire: {
@@ -95,7 +95,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: _CONFIG.env.mode }
     }),
-    new ManifestPlugin({ // add manifest.json
+    new ManifestPlugin({
       fileName: _CONFIG.filenames.entry.manifest,
       basePath: '',
       seed: {

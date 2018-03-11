@@ -3,7 +3,7 @@
 // Load scripts
 function load_theme_scripts() {
 
-  $uri = get_template_directory_uri() . '/public/';
+  $uri = get_template_directory_uri() . '/app/public/';
   $assets = get_asset_from_manifest();
   $script_keys = [
     'manifest.js',

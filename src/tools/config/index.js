@@ -12,6 +12,7 @@ const _DIRECTORIES = {
   root: _ROOT,
 
   entry: new function() {
+
     // Root
     this.src                = 'src/';
     this.tools              = `${this.src}tools/`;
@@ -39,7 +40,7 @@ const _DIRECTORIES = {
   },
 
   output: new function() {
-    this.public             = `public`;
+    this.public             = `app/public`;
     this.js                 = `js/`;
     this.css                = `css/`;
     this.media              = `media/`;
@@ -89,9 +90,9 @@ const _APP = new function() {
 const _SERVER = new function() {
   this.autoOpenBrowser = true;
   this.port            = process.env.PORT || 8181;
-  this.target          = `http://localhost/wordpress/`; //devurl
-  this.proxy           = `http://localhost:${this.port}`;
-  this.public_path     = `${this.proxy}/wordpress/wp-content/themes/wp-webpack/${_DIRECTORIES.output.public}`; // Path to theme root (/wp-content/themes/my-theme/)
+  this.dev_url         = `http://localhost/wordpress`;
+  this.proxy_url       = `http://localhost:${this.port}`;
+  this.public_path     = `/wordpress/wp-content/themes/wp-webpack/${_DIRECTORIES.output.public}`; // Path to theme root (/wp-content/themes/my-theme/)
 };
 
 const _CONFIG = {
@@ -109,7 +110,7 @@ const _CONFIG = {
       `./${_DIRECTORIES.entry.scss_placeholders}`
     ].filter(resource => fs.existsSync(resource)).map(path => fs.readdirSync(path).map(filename => path + filename))
   ),
-  resolve: function(dir) {
+  resolve: function(dir = '') {
     return _PATH.join(_DIRECTORIES.root, dir);
   }
 };

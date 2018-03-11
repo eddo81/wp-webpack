@@ -31,9 +31,9 @@ let webpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsPlugin(),
     new BrowserSyncPlugin({
-      target: _CONFIG.server.target,
+      target: _CONFIG.server.dev_url,
       open: _CONFIG.server.autoOpenBrowser,
-      proxyUrl: _CONFIG.server.proxy,
+      proxyUrl: _CONFIG.server.proxy_url,
       watch: ['**/*.php'],
       injectChanges: true,
       logFileChanges: true,

@@ -13,7 +13,6 @@ let webpackConfig = merge(baseWebpackConfig, {
   module: { rules: utils.styleLoaders({ sourceMap: true, extract: true }) },
 
   output: {
-    path: `${_CONFIG.directories.root + _CONFIG.directories.output.public}`,
     filename: `${_CONFIG.directories.output.js}[name].[chunkhash].js`,
     chunkFilename: `${_CONFIG.directories.output.js}[name]_[id].[chunkhash].js`
   },

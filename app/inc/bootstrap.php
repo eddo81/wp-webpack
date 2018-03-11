@@ -1,6 +1,6 @@
 <?php
 
-define("_PUBLIC_", get_template_directory() . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
+define("_PUBLIC_", get_template_directory() . DIRECTORY_SEPARATOR . 'app/public' . DIRECTORY_SEPARATOR);
 
 /**
  * Asset discovery

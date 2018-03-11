@@ -7,7 +7,7 @@
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <?php wp_head(); ?>
 </head>
-<body>hej2
+<body>
   <div id="app"></div>
   <?php wp_footer(); ?>
 </body>

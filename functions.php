@@ -16,5 +16,5 @@ function manifest_link() {
 }
 add_action('wp_head', 'manifest_link');
 
-require_once('inc/bootstrap.php');
-require_once('inc/enqueue.php');
+require_once('app/inc/bootstrap.php');
+require_once('app/inc/enqueue.php');

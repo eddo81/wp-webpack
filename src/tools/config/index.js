@@ -24,6 +24,7 @@ const _DIRECTORIES = {
 
     // Assets
     this.static             = `${this.assets}static/`;
+    this.html               = `${this.assets}html/`;
     this.images             = `${this.assets}images/`;
     this.media              = `${this.assets}media/`;
     this.fonts              = `${this.assets}fonts/`;
@@ -40,7 +41,10 @@ const _DIRECTORIES = {
   },
 
   output: new function() {
-    this.public             = `app/public`;
+    this.app                = `app/`;
+    this.public             = `${this.app}public/`;
+    this.views              = `${this.app}views/`;
+    this.layout             = `${this.views}layouts/`;
     this.js                 = `js/`;
     this.css                = `css/`;
     this.media              = `media/`;
@@ -62,7 +66,7 @@ const _FILENAMES = {
 
   output: new function() {
     this.js                 = `bundle.js`;
-    this.html               = `index.html`;
+    this.php                = `master.php`;
     this.css                = `style.css`;
   }
 };
@@ -87,16 +91,29 @@ const _APP = new function() {
   this.theme_color      = '#FFFFFF';
 };
 
+const _THEME = new function() {
+  this.name             = 'wp-webpack';
+  this.description      = 'A WordPress starter theme.';
+  this.uri              = '';
+  this.version          = '1.0.0';
+  this.author           = '';
+  this.author_uri       = '';
+  this.text_domain      = 'wpwebpack';
+  this.license          = 'MIT License';
+  this.license_uri      = 'http://opensource.org/licenses/MIT';
+};
+
 const _SERVER = new function() {
   this.autoOpenBrowser = true;
-  this.port            = process.env.PORT || 8181;
+  this.port            = 8080;
   this.dev_url         = `http://localhost/wordpress`;
   this.proxy_url       = `http://localhost:${this.port}`;
-  this.public_path     = `/wordpress/wp-content/themes/wp-webpack/${_DIRECTORIES.output.public}`; // Path to theme root (/wp-content/themes/my-theme/)
+  this.public_path     = `/wp-content/themes/${_THEME.name}/${_DIRECTORIES.output.public}`; // Path to theme root (/wp-content/themes/my-theme/)
 };
 
 const _CONFIG = {
   app:          _APP,
+  theme:        _THEME,
   env:          _ENV,
   directories:  _DIRECTORIES,
   filenames:    _FILENAMES,

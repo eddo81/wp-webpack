@@ -9,7 +9,13 @@ const BrowserSyncPlugin = require('browsersync-webpack-plugin');
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = [`./${_CONFIG.directories.entry.server}hmr-client`].concat(baseWebpackConfig.entry[name]);
-})
+});
+
+baseWebpackConfig.module.rules.forEach(function (rule) {
+  if(rule.test === _CONFIG.extensions.js && Array.isArray(rule.loaders)) {
+    rule.loaders.push('webpack-module-hot-accept');
+  }
+});
 
 let webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -34,13 +40,7 @@ let webpackConfig = merge(baseWebpackConfig, {
       target: _CONFIG.server.dev_url,
       open: _CONFIG.server.autoOpenBrowser,
       proxyUrl: _CONFIG.server.proxy_url,
-      watch: ['**/*.php'],
-      injectChanges: true,
-      logFileChanges: true,
-      logLevel: 'debug',
-      logPrefix: 'wepback',
-      notify: false,
-      reloadDelay: 0
+      watch: [`${_CONFIG.directories.output.app}**/*.php`]
     })
   ]
 });

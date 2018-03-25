@@ -4,6 +4,7 @@ const _CONFIG = require('../config');
 const icons = require('../utils/get-icon-paths.js');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,7 +13,8 @@ module.exports = {
 
   output: {
     path: _CONFIG.resolve(_CONFIG.directories.output.public),
-    filename: `${_CONFIG.directories.output.js}[name].js`
+    filename: `${_CONFIG.directories.output.js}[name].js`,
+    publicPath: _CONFIG.server.public_path
   },
 
   resolve: {
@@ -58,7 +60,7 @@ module.exports = {
       {
         test: _CONFIG.extensions.js,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loaders: ['babel-loader'],
         include: [_CONFIG.resolve(_CONFIG.directories.entry.framework), _CONFIG.resolve(_CONFIG.directories.entry.scripts)]
       },
 
@@ -95,6 +97,20 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: _CONFIG.env.mode }
     }),
+
+    new HtmlWebpackPlugin({
+      filename: _CONFIG.resolve(_CONFIG.directories.output.layout) + _CONFIG.filenames.output.php,
+      template: `${_CONFIG.directories.entry.html + _CONFIG.filenames.entry.html}`,
+      inject: true,
+      minify: (_CONFIG.env.debug === true) ? undefined : {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      },
+      chunksSortMode: 'dependency',
+      config: _CONFIG
+    }),
+
     new ManifestPlugin({
       fileName: _CONFIG.filenames.entry.manifest,
       basePath: '',

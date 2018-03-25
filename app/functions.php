@@ -9,12 +9,5 @@ function remove_redirects() {
 }
 add_action('init', 'remove_redirects');
 
-// Creates the link tag
-function manifest_link() {
-  $uri = get_template_directory_uri() . '/public/manifest.json';
-  echo '<link rel="manifest" href="'.$uri.'">';
-}
-add_action('wp_head', 'manifest_link');
+//var_dump(get_bloginfo('url')); die();
 
-require_once('app/inc/bootstrap.php');
-require_once('app/inc/enqueue.php');

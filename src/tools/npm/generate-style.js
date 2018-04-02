@@ -10,8 +10,8 @@ Author:             ${_CONFIG.theme.author}
 Author URI:         ${_CONFIG.theme.author_uri}
 Text Domain:        ${_CONFIG.theme.text_domain}
 
-License:            ${_CONFIG.theme.license}
-License URI:        ${_CONFIG.theme.license_uri}
+License:            MIT License
+License URI:        http://opensource.org/licenses/MIT
 */`;
 
 fs.writeFile(_CONFIG.resolve(`${_CONFIG.directories.output.app}style.css`), style, (error) => {

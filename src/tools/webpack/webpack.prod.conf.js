@@ -6,7 +6,6 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 let webpackConfig = merge(baseWebpackConfig, {
 
@@ -28,7 +27,7 @@ let webpackConfig = merge(baseWebpackConfig, {
 
     // extract css into its own file
     new ExtractTextPlugin({
-      filename: `${_CONFIG.directories.output.css}[name].css?id=[contenthash]`
+      filename: `${_CONFIG.directories.output.css}[name].[contenthash].css`
     }),
 
     // Compress extracted CSS. We are using this plugin so that possible
@@ -62,15 +61,7 @@ let webpackConfig = merge(baseWebpackConfig, {
         to: '',
         ignore: ['.*']
       }
-    ]),
-
-    new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
-      threshold: 10240,
-      minRatio: 0.8
-    })
+    ])
   ]
 });
 

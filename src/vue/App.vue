@@ -344,7 +344,7 @@
             Cutestrap ©2016
           </p>
           <p class="ta-right f-right clearfix">
-            Made with ♥ by <a href="https://www.tylerchilds.com" target="_blank" rel="noopener">Tyler Childs</a>
+            Made with ♥ byy <a href="https://www.tylerchilds.com" target="_blank" rel="noopener">Tyler Childs</a>
           </p>
         </div>
       </div>

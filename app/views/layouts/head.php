@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'favicon-16x16.png' %>"> -->
     <!--[if IE]><link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'favicon.ico' %>"><![endif]-->
     <!-- Add to home screen for Android and modern mobile browsers -->
-    <link rel="manifest" href="<?= get_bloginfo('url'); ?><%= htmlWebpackPlugin.options.config.server.public_path + 'manifest.json' %>">
+    <!-- <link rel="manifest" href="<?= get_bloginfo('url'); ?><%= htmlWebpackPlugin.options.config.server.public_path + 'manifest.json' %>"> -->
     <meta name="theme-color" content="#000000">
 
     <!-- Add to home screen for Safari on iOS -->
@@ -22,18 +22,14 @@
     <!-- Add to home screen for Windows -->
     <!-- <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'msapplication-icon-144x144.png' %>"> -->
     <meta name="msapplication-TileColor" content="#000000">
-    <% for (var chunk of webpack.chunks) {
-      for (var file of chunk.files) {
-        if (file.match(/\.(js|css)$/)) { %>
-    <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<?= get_bloginfo('url'); ?><%= htmlWebpackPlugin.options.config.server.public_path + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
     <?php wp_head(); ?>
+    <?php if(!empty($assets['css'])): ?>
+      <?php foreach($assets['css'] as $href): ?>
+        <link rel="stylesheet" href="<?= get_bloginfo('template_url') . $href; ?>">
+      <?php endforeach; ?>
+    <?php endif; ?>
   </head>
   <body>
     <noscript id="noscript"><aside><p><span>This page requires JavaScript, please enable it in your browser to access the content.</span></p><footer></footer></aside></noscript>
     <!--[if lte IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
-    <main id="app"></main>
-    <?php wp_footer(); ?>
-    <!-- <%= htmlWebpackPlugin.options.serviceWorkerLoader %> -->
-    <!-- built files will be auto injected -->
-  </body>
-</html>
+

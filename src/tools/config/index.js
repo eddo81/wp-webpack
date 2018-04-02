@@ -43,8 +43,7 @@ const _DIRECTORIES = {
   output: new function() {
     this.app                = `app/`;
     this.public             = `${this.app}public/`;
-    this.views              = `${this.app}views/`;
-    this.layout             = `${this.views}layouts/`;
+    this.classes            = `${this.app}classes/`;
     this.js                 = `js/`;
     this.css                = `css/`;
     this.media              = `media/`;
@@ -58,7 +57,6 @@ const _FILENAMES = {
 
   entry: new function() {
     this.js                 = `main.js`;
-    this.html               = `index.html`;
     this.manifest           = `manifest.json`;
     this.scss               = `style.scss`;
     this.webpack_config     = `webpack.${(_ENV.debug) ? 'dev' : 'prod' }.conf.js`;
@@ -66,7 +64,7 @@ const _FILENAMES = {
 
   output: new function() {
     this.js                 = `bundle.js`;
-    this.php                = `master.php`;
+    this.php                = `Paragon.php`;
     this.css                = `style.css`;
   }
 };
@@ -83,24 +81,16 @@ const _EXTENSIONS = {
   html:     /\.html$/i
 };
 
-const _APP = new function() {
-  this.name             = '' || (_PKG.name.charAt(0).toUpperCase() + _PKG.name.slice(1)).trim();
-  this.short_name       = '' || this.name;
-  this.description      = '' || _PKG.description;
-  this.background_color = '#000000';
-  this.theme_color      = '#FFFFFF';
-};
-
 const _THEME = new function() {
-  this.name             = 'wp-webpack';
-  this.description      = 'A WordPress starter theme.';
+  this.name             = 'Paragon';
+  this.description      = 'A modern WordPress starter theme.';
   this.uri              = '';
   this.version          = '1.0.0';
   this.author           = '';
   this.author_uri       = '';
-  this.text_domain      = 'wpwebpack';
-  this.license          = 'MIT License';
-  this.license_uri      = 'http://opensource.org/licenses/MIT';
+  this.text_domain      = 'paragon';
+  this.background_color = '#000000';
+  this.theme_color      = '#FFFFFF';
 };
 
 const _SERVER = new function() {
@@ -112,7 +102,6 @@ const _SERVER = new function() {
 };
 
 const _CONFIG = {
-  app:          _APP,
   theme:        _THEME,
   env:          _ENV,
   directories:  _DIRECTORIES,

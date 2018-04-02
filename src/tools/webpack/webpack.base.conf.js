@@ -4,7 +4,8 @@ const _CONFIG = require('../config');
 const icons = require('../utils/get-icon-paths.js');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SortAssetsPlugin = require('../utils/sort-assets-plugin.js');
+const InjectAssets = require('../utils/inject-assets.js');
 
 module.exports = {
   entry: {
@@ -98,32 +99,21 @@ module.exports = {
       'process.env': { NODE_ENV: _CONFIG.env.mode }
     }),
 
-    new HtmlWebpackPlugin({
-      filename: _CONFIG.resolve(_CONFIG.directories.output.layout) + _CONFIG.filenames.output.php,
-      template: `${_CONFIG.directories.entry.html + _CONFIG.filenames.entry.html}`,
-      inject: true,
-      minify: (_CONFIG.env.debug === true) ? undefined : {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      },
-      chunksSortMode: 'dependency',
-      config: _CONFIG
-    }),
+    new SortAssetsPlugin((assetsByType) => { InjectAssets(assetsByType); }),
 
     new ManifestPlugin({
       fileName: _CONFIG.filenames.entry.manifest,
       basePath: '',
       seed: {
-        name: _CONFIG.app.name,
-        short_name: _CONFIG.app.short_name,
-        description: _CONFIG.app.description,
+        name: _CONFIG.theme.name,
+        short_name: _CONFIG.theme.name,
+        description: _CONFIG.theme.description,
         icons: icons,
         start_url: "/",
         display: 'standalone',
         orientation: 'portrait',
-        background_color: _CONFIG.app.background_color,
-        theme_color:  _CONFIG.app.theme_color,
+        background_color:_CONFIG.theme.background_color,
+        theme_color:  _CONFIG.theme.theme_color,
       }
     })
   ]

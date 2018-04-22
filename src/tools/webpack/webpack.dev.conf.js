@@ -6,7 +6,7 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const BrowserSyncPlugin = require('browsersync-webpack-plugin');
 
-// add hot-reload related code to entry chunks
+//add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = [`./${_CONFIG.directories.entry.server}hmr-client`].concat(baseWebpackConfig.entry[name]);
 });
@@ -18,6 +18,7 @@ baseWebpackConfig.module.rules.forEach(function (rule) {
 });
 
 let webpackConfig = merge(baseWebpackConfig, {
+
   module: {
     rules: utils.styleLoaders({
       sourceMap: false
@@ -36,11 +37,28 @@ let webpackConfig = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsPlugin(),
+
     new BrowserSyncPlugin({
       target: _CONFIG.server.dev_url,
       open: _CONFIG.server.autoOpenBrowser,
       proxyUrl: _CONFIG.server.proxy_url,
-      watch: [`${_CONFIG.directories.output.app}**/*.php`]
+      advanced: {
+        browserSync: {
+
+          files: [
+            `${_CONFIG.directories.output.app}**/*.php`,
+            `!${_CONFIG.directories.output.classes + _CONFIG.filenames.output.php}`,
+          ],
+
+          ghostMode: {
+            clicks: true,
+            forms: true,
+            scroll: true
+          },
+
+          notify: false
+        }
+      }
     })
   ]
 });

@@ -24,7 +24,6 @@ const _DIRECTORIES = {
 
     // Assets
     this.static             = `${this.assets}static/`;
-    this.html               = `${this.assets}html/`;
     this.images             = `${this.assets}images/`;
     this.media              = `${this.assets}media/`;
     this.fonts              = `${this.assets}fonts/`;
@@ -42,7 +41,9 @@ const _DIRECTORIES = {
 
   output: new function() {
     this.app                = `app/`;
-    this.public             = `${this.app}public/`;
+    this.assets             = `${this.app}assets/`;
+    this.includes           = `${this.app}includes/`;
+    this.views              = `${this.app}views/`;
     this.classes            = `${this.app}classes/`;
     this.js                 = `js/`;
     this.css                = `css/`;
@@ -64,13 +65,12 @@ const _FILENAMES = {
 
   output: new function() {
     this.js                 = `bundle.js`;
-    this.php                = `Paragon.php`;
+    this.php                = `AssetsLoader.php`;
     this.css                = `style.css`;
   }
 };
 
 const _EXTENSIONS = {
-  eslint:   /\.(js|es6|vue)$/i,
   js:       /\.(js|es6)$/i,
   vue:      /\.vue$/i,
   scss:     /\.s[a|c]ss$/i,
@@ -98,7 +98,7 @@ const _SERVER = new function() {
   this.port            = 8080;
   this.dev_url         = `http://localhost/wordpress`;
   this.proxy_url       = `http://localhost:${this.port}`;
-  this.public_path     = `/wp-content/themes/${_THEME.name}/${_DIRECTORIES.output.public}`; // Path to theme root (/wp-content/themes/my-theme/)
+  this.public_path     = `/wp-content/themes/${_THEME.name}/${_DIRECTORIES.output.assets}`; // Path to theme root (/wp-content/themes/my-theme/)
 };
 
 const _CONFIG = {

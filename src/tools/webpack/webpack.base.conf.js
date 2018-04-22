@@ -4,7 +4,7 @@ const _CONFIG = require('../config');
 const icons = require('../utils/get-icon-paths.js');
 const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const SortAssetsPlugin = require('../utils/sort-assets-plugin.js');
+const SortAssetsPlugin = require('./plugins/sort-assets-plugin.js');
 const InjectAssets = require('../utils/inject-assets.js');
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   output: {
-    path: _CONFIG.resolve(_CONFIG.directories.output.public),
+    path: _CONFIG.resolve(_CONFIG.directories.output.assets),
     filename: `${_CONFIG.directories.output.js}[name].js`,
     publicPath: _CONFIG.server.public_path
   },
@@ -34,13 +34,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: _CONFIG.extensions.eslint,
+        test: new RegExp(`${_CONFIG.extensions.js.source}|${_CONFIG.extensions.vue.source}`),
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [_CONFIG.resolve(_CONFIG.directories.entry.framework)],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
+        include: [_CONFIG.resolve(_CONFIG.directories.entry.framework), _CONFIG.resolve(_CONFIG.directories.entry.scripts)]
+      },
+
+      {
+        test: new RegExp(`${_CONFIG.extensions.js.source}|${_CONFIG.extensions.scss.source}`),
+        loader: 'import-glob',
+        enforce: 'pre',
+        include: [_CONFIG.resolve(_CONFIG.directories.entry.assets)]
       },
 
       {
@@ -94,12 +98,23 @@ module.exports = {
     ]
   },
 
+  externals: {
+    jquery: 'jQuery',
+  },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: _CONFIG.env.mode }
     }),
 
-    new SortAssetsPlugin((assetsByType) => { InjectAssets(assetsByType); }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Popper: 'popper.js/dist/umd/popper.js',
+    }),
+
+    new SortAssetsPlugin((assetsByType) => { InjectAssets(assetsByType); }, `/${_CONFIG.directories.output.assets}`),
 
     new ManifestPlugin({
       fileName: _CONFIG.filenames.entry.manifest,

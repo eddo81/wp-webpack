@@ -6,6 +6,8 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+//const SortAssetsPlugin = require('../utils/sort-assets-plugin.js');
+//const InjectAssets = require('../utils/inject-assets.js');
 
 let webpackConfig = merge(baseWebpackConfig, {
 

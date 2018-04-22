@@ -1,4 +1,4 @@
-// The Vue build version to load with the `import` command
+/* eslint-disable no-unused-vars */
 import Style      from 'assets/scss/style.scss';
 import Vue        from 'vue';
 import App        from '@/App.vue';
@@ -23,3 +23,7 @@ new Vue({
   el: '#app',
   render: h => h(App)
 });
+
+let trigger = document.querySelector('#trigger');
+
+trigger.addEventListener('click', (event) => { console.log(event); });

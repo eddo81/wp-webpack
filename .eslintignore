@@ -1,2 +1,2 @@
-src/tools/*.js
-src/tools/config/*.js
+/app/assets/
+/src/tools/

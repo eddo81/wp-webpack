@@ -3,7 +3,7 @@
     <header class="ta-center container--lg">
       <a href="javascript:;" class="js-grid-toggle grid-toggle link__underline">Toggle Gridlines</a>
       <h1>
-        Cutestrap
+        Cutestrap2
       </h1>
       <p>A sassy, opinionated CSS Framework. A tiny alternative to Bootstrap.</p>
       <p>
@@ -344,7 +344,7 @@
             Cutestrap ©2016
           </p>
           <p class="ta-right f-right clearfix">
-            Made with ♥ byy <a href="https://www.tylerchilds.com" target="_blank" rel="noopener">Tyler Childs</a>
+            Made with ♥ by <a href="https://www.tylerchilds.com" target="_blank" rel="noopener">Tyler Childs</a>
           </p>
         </div>
       </div>
@@ -353,6 +353,7 @@
 </template>
 
 <script>
+
   export default {
     name: 'app',
     data () {

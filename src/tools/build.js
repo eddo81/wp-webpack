@@ -1,5 +1,3 @@
-//require('./utils/check-versions')();
-
 const rm = require('rimraf');
 const webpack = require('webpack');
 const _CONFIG = require('./config');
@@ -7,7 +5,7 @@ const webpackConfig = require(`./webpack/${_CONFIG.filenames.entry.webpack_confi
 
 console.log(`building for ${_CONFIG.env.mode}...`);
 
-rm(_CONFIG.resolve(_CONFIG.directories.output.public), err => {
+rm(_CONFIG.resolve(_CONFIG.directories.output.assets), err => {
 
   if (err) {
     throw err;
@@ -32,4 +30,5 @@ rm(_CONFIG.resolve(_CONFIG.directories.output.public), err => {
     }
 
   });
+
 });

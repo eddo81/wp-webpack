@@ -1,11 +1,10 @@
 const fs = require('fs');
 const utils = require('../utils/utils');
+const _WRITE = require('write');
 const _CONFIG = require('../config');
-const icons = require('../utils/get-icon-paths.js');
 const webpack = require('webpack');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const SortAssetsPlugin = require('./plugins/sort-assets-plugin.js');
-const InjectAssets = require('../utils/inject-assets.js');
+const WriteFilePlugin = require('./plugins/write-file-plugin');
+const SortAssetsPlugin = require('./plugins/sort-assets-plugin');
 
 module.exports = {
   entry: {
@@ -114,22 +113,29 @@ module.exports = {
       Popper: 'popper.js/dist/umd/popper.js',
     }),
 
-    new SortAssetsPlugin((assetsByType) => { InjectAssets(assetsByType); }, `/${_CONFIG.directories.output.assets}`),
+    new SortAssetsPlugin({prependPath: `/${_CONFIG.directories.output.assets}`}, (assetsByType) => {
+      const template_variables = {
+        class_name: 'Config',
+        package_name: 'paragon',
+        author: _CONFIG.package.author,
+        text_domain: _CONFIG.theme.text_domain,
+        env: _CONFIG.env,
+        assets: assetsByType
+      };
 
-    new ManifestPlugin({
-      fileName: _CONFIG.filenames.entry.manifest,
-      basePath: '',
-      seed: {
-        name: _CONFIG.theme.name,
-        short_name: _CONFIG.theme.name,
-        description: _CONFIG.theme.description,
-        icons: icons,
-        start_url: "/",
-        display: 'standalone',
-        orientation: 'portrait',
-        background_color:_CONFIG.theme.background_color,
-        theme_color:  _CONFIG.theme.theme_color,
-      }
+      const contents = require('./plugins/write-file-plugin/templates/php-class-template.js')(template_variables);
+
+      _WRITE.sync(_CONFIG.resolve(_CONFIG.directories.output.classes + `${template_variables.class_name}.php`), contents, (error) => { if (error) { throw error; } });
+    }),
+
+    new WriteFilePlugin({
+      filePath: _CONFIG.resolve(_CONFIG.directories.output.assets + 'manifest.json'),
+      fileContents: require('./plugins/write-file-plugin/templates/manifest-template.js')(_CONFIG.theme)
+    }),
+
+    new WriteFilePlugin({
+      filePath: _CONFIG.resolve('style.css'),
+      fileContents: require('./plugins/write-file-plugin/templates/style-css-template.js')(_CONFIG.theme)
     })
   ]
 };

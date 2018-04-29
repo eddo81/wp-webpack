@@ -21,6 +21,8 @@ const _DIRECTORIES = {
 
     // Tools
     this.server             = `${this.tools}server/`;
+    this.webpack            = `${this.tools}webpack/`;
+    this.plugins            = `${this.webpack}plugins/`;
 
     // Assets
     this.static             = `${this.assets}static/`;
@@ -42,9 +44,7 @@ const _DIRECTORIES = {
   output: new function() {
     this.app                = `app/`;
     this.assets             = `${this.app}assets/`;
-    this.includes           = `${this.app}includes/`;
-    this.views              = `${this.app}views/`;
-    this.classes            = `${this.app}classes/`;
+    this.classes            = `${this.app}classes/theme_config/`;
     this.js                 = `js/`;
     this.css                = `css/`;
     this.media              = `media/`;
@@ -58,14 +58,12 @@ const _FILENAMES = {
 
   entry: new function() {
     this.js                 = `main.js`;
-    this.manifest           = `manifest.json`;
     this.scss               = `style.scss`;
     this.webpack_config     = `webpack.${(_ENV.debug) ? 'dev' : 'prod' }.conf.js`;
   },
 
   output: new function() {
     this.js                 = `bundle.js`;
-    this.php                = `AssetsLoader.php`;
     this.css                = `style.css`;
   }
 };
@@ -78,6 +76,7 @@ const _EXTENSIONS = {
   images:   /\.(png|jpe?g|gif|svg|tiff|bmp|ico)(\?.*)?$/i,
   media:    /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i,
   fonts:    /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+  json:     /\.json$/i,
   html:     /\.html$/i
 };
 

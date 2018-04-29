@@ -19,7 +19,7 @@ if (!file_exists($composer = __DIR__ . '/app/classes/vendor/autoload.php')) {
 }
 require_once $composer;
 
-if (!file_exists($assets_loader = __DIR__ . '/app/classes/AssetsLoader.php')) {
+if (!file_exists($assets_loader = __DIR__ . '/app/classes/theme_config/Config.php')) {
   paragon_error(
     __("<code>{$assets_loader}</code><br><br>Please run the <code>npm start</code> or <code>npm run build</code> command from the \"src\" directory to generate it.", 'paragon'),
     __('File not found.', 'paragon')

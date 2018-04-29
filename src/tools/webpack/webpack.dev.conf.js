@@ -4,6 +4,7 @@ const _CONFIG = require('../config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+
 const BrowserSyncPlugin = require('browsersync-webpack-plugin');
 
 //add hot-reload related code to entry chunks
@@ -13,7 +14,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 baseWebpackConfig.module.rules.forEach(function (rule) {
   if(rule.test === _CONFIG.extensions.js && Array.isArray(rule.loaders)) {
-    rule.loaders.push('webpack-module-hot-accept');
+    rule.loaders.push(_CONFIG.resolve(`${_CONFIG.directories.entry.plugins}module-hot-accept-plugin`));
   }
 });
 
@@ -37,7 +38,6 @@ let webpackConfig = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsPlugin(),
-
     new BrowserSyncPlugin({
       target: _CONFIG.server.dev_url,
       open: _CONFIG.server.autoOpenBrowser,
@@ -56,7 +56,7 @@ let webpackConfig = merge(baseWebpackConfig, {
             scroll: true
           },
 
-          notify: false
+          notify: { styles: ['display: none;'] }
         }
       }
     })

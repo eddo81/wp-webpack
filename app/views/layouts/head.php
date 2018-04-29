@@ -11,7 +11,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'favicon-16x16.png' %>"> -->
     <!--[if IE]><link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'favicon.ico' %>"><![endif]-->
     <!-- Add to home screen for Android and modern mobile browsers -->
-    <!-- <link rel="manifest" href="<?= get_bloginfo('url'); ?><%= htmlWebpackPlugin.options.config.server.public_path + 'manifest.json' %>"> -->
+    <link rel="manifest" href="<?= get_bloginfo('url') . '/wp-content/themes/paragon/app/assets/manifest.json'; ?>">
+
     <meta name="theme-color" content="#000000">
 
     <!-- Add to home screen for Safari on iOS -->

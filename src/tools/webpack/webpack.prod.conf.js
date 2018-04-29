@@ -6,8 +6,8 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-//const SortAssetsPlugin = require('../utils/sort-assets-plugin.js');
-//const InjectAssets = require('../utils/inject-assets.js');
+const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 
 let webpackConfig = merge(baseWebpackConfig, {
 
@@ -38,6 +38,16 @@ let webpackConfig = merge(baseWebpackConfig, {
       cssProcessorOptions: {
         safe: true
       }
+    }),
+
+    new ImageminPlugin({
+      optipng: { optimizationLevel: 7 },
+      gifsicle: { optimizationLevel: 3 },
+      pngquant: { quality: '65-90', speed: 4 },
+      svgo: {
+        plugins: [{ removeUnknownsAndDefaults: false }, { cleanupIDs: false }],
+      },
+      plugins: [imageminMozjpeg({ quality: 75 })]
     }),
 
     // split vendor js into its own file

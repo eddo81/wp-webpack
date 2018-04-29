@@ -24,6 +24,3 @@ new Vue({
   render: h => h(App)
 });
 
-let trigger = document.querySelector('#trigger');
-
-trigger.addEventListener('click', (event) => { console.log(event); });

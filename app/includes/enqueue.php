@@ -5,10 +5,10 @@
  */
 add_action('wp_enqueue_scripts', function () {
   try {
-    foreach(App\AssetsLoader::get_assets('css') as $asset_path) {
+    foreach(App\Config::get_assets('css') as $asset_path) {
       wp_enqueue_style('',  get_bloginfo('template_url') . $asset_path, false, null);
     }
-    foreach(App\AssetsLoader::get_assets('js') as $key => $asset_path) {
+    foreach(App\Config::get_assets('js') as $key => $asset_path) {
       wp_enqueue_script('script_' . $key,  get_bloginfo('template_url') . $asset_path, ['jquery'], null, true);
     }
   }catch (Exception $e) {

@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'favicon-16x16.png' %>"> -->
     <!--[if IE]><link rel="shortcut icon" href="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'favicon.ico' %>"><![endif]-->
     <!-- Add to home screen for Android and modern mobile browsers -->
-    <link rel="manifest" href="<?= get_bloginfo('url') . '/wp-content/themes/paragon/app/assets/manifest.json'; ?>">
+    <link rel="manifest" href="<?= get_bloginfo('url') . '/wp-content/themes/presto/app/assets/manifest.json'; ?>">
 
     <meta name="theme-color" content="#000000">
 
@@ -24,8 +24,8 @@
     <!-- <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.options.config.directories.output.icons + 'msapplication-icon-144x144.png' %>"> -->
     <meta name="msapplication-TileColor" content="#000000">
     <?php wp_head(); ?>
-    <?php if(!empty($assets['css'])): ?>
-      <?php foreach($assets['css'] as $href): ?>
+    <?php if (!empty($assets['css'])) : ?>
+      <?php foreach ($assets['css'] as $href) : ?>
         <link rel="stylesheet" href="<?= get_bloginfo('template_url') . $href; ?>">
       <?php endforeach; ?>
     <?php endif; ?>

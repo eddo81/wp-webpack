@@ -5,6 +5,7 @@ const _CONFIG = require('../config');
 const webpack = require('webpack');
 const WriteFilePlugin = require('./plugins/write-file-plugin');
 const SortAssetsPlugin = require('./plugins/sort-assets-plugin');
+const writeFile = require('../utils/write-file.js');
 
 module.exports = {
   entry: {
@@ -20,27 +21,34 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      vue$: 'vue/dist/vue.esm.js',
       '@': _CONFIG.resolve(_CONFIG.directories.entry.framework),
-      'assets': _CONFIG.resolve(_CONFIG.directories.entry.assets)
+      assets: _CONFIG.resolve(_CONFIG.directories.entry.assets)
     }
   },
 
-  devtool: (_CONFIG.env.debug) ? '#cheap-module-eval-source-map' : '#source-map',
+  devtool: _CONFIG.env.debug ? '#cheap-module-eval-source-map' : '#source-map',
 
-  watch: (_CONFIG.env.debug),
+  watch: _CONFIG.env.debug,
 
   module: {
     rules: [
       {
-        test: new RegExp(`${_CONFIG.extensions.js.source}|${_CONFIG.extensions.vue.source}`),
+        test: new RegExp(
+          `${_CONFIG.extensions.js.source}|${_CONFIG.extensions.vue.source}`
+        ),
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [_CONFIG.resolve(_CONFIG.directories.entry.framework), _CONFIG.resolve(_CONFIG.directories.entry.scripts)]
+        include: [
+          _CONFIG.resolve(_CONFIG.directories.entry.framework),
+          _CONFIG.resolve(_CONFIG.directories.entry.scripts)
+        ]
       },
 
       {
-        test: new RegExp(`${_CONFIG.extensions.js.source}|${_CONFIG.extensions.scss.source}`),
+        test: new RegExp(
+          `${_CONFIG.extensions.js.source}|${_CONFIG.extensions.scss.source}`
+        ),
         loader: 'import-glob',
         enforce: 'pre',
         include: [_CONFIG.resolve(_CONFIG.directories.entry.assets)]
@@ -51,8 +59,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: utils.cssLoaders({
-            sourceMap: (!_CONFIG.env.debug),
-            extract: (!_CONFIG.env.debug)
+            sourceMap: !_CONFIG.env.debug,
+            extract: !_CONFIG.env.debug
           }),
           transformToRequire: {
             video: 'src',
@@ -65,7 +73,10 @@ module.exports = {
         test: _CONFIG.extensions.js,
         exclude: /node_modules/,
         loaders: ['babel-loader'],
-        include: [_CONFIG.resolve(_CONFIG.directories.entry.framework), _CONFIG.resolve(_CONFIG.directories.entry.scripts)]
+        include: [
+          _CONFIG.resolve(_CONFIG.directories.entry.framework),
+          _CONFIG.resolve(_CONFIG.directories.entry.scripts)
+        ]
       },
 
       {
@@ -98,7 +109,7 @@ module.exports = {
   },
 
   externals: {
-    jquery: 'jQuery',
+    jquery: 'jQuery'
   },
 
   plugins: [
@@ -110,32 +121,47 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      Popper: 'popper.js/dist/umd/popper.js',
+      Popper: 'popper.js/dist/umd/popper.js'
     }),
 
-    new SortAssetsPlugin({prependPath: `/${_CONFIG.directories.output.assets}`}, (assetsByType) => {
-      const template_variables = {
-        class_name: 'Config',
-        package_name: 'paragon',
-        author: _CONFIG.package.author,
-        text_domain: _CONFIG.theme.text_domain,
-        env: _CONFIG.env,
-        assets: assetsByType
-      };
+    new SortAssetsPlugin(
+      { prependPath: `/${_CONFIG.directories.output.assets}` },
+      assetsByType => {
+        const template_variables = {
+          class_name: 'Config',
+          package_name: 'presto',
+          author: _CONFIG.package.author,
+          text_domain: _CONFIG.theme.text_domain,
+          env: _CONFIG.env,
+          assets: assetsByType
+        };
 
-      const contents = require('./plugins/write-file-plugin/templates/php-class-template.js')(template_variables);
-
-      _WRITE.sync(_CONFIG.resolve(_CONFIG.directories.output.classes + `${template_variables.class_name}.php`), contents, (error) => { if (error) { throw error; } });
-    }),
+        writeFile(
+          _CONFIG.resolve(
+            `${_CONFIG.directories.output.classes +
+              template_variables.class_name}.php`
+          ),
+          require('./plugins/write-file-plugin/templates/php-class-template.js')(
+            template_variables
+          )
+        );
+      }
+    ),
 
     new WriteFilePlugin({
-      filePath: _CONFIG.resolve(_CONFIG.directories.output.assets + 'manifest.json'),
-      fileContents: require('./plugins/write-file-plugin/templates/manifest-template.js')(_CONFIG.theme)
+      filePath: _CONFIG.resolve(
+        _CONFIG.directories.output.assets + 'manifest.json'
+      ),
+      fileContents: require('./plugins/write-file-plugin/templates/manifest-template.js')(
+        _CONFIG.theme
+      )
     }),
 
     new WriteFilePlugin({
       filePath: _CONFIG.resolve('style.css'),
-      fileContents: require('./plugins/write-file-plugin/templates/style-css-template.js')(_CONFIG.theme)
+      fileContents: require('./plugins/write-file-plugin/templates/style-css-template.js')(
+        _CONFIG.theme
+      )
     })
   ]
 };

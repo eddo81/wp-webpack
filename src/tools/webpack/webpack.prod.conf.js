@@ -3,14 +3,12 @@ const webpack = require('webpack');
 const _CONFIG = require('../config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
 let webpackConfig = merge(baseWebpackConfig, {
-
   module: { rules: utils.styleLoaders({ sourceMap: true, extract: true }) },
 
   output: {
@@ -19,7 +17,6 @@ let webpackConfig = merge(baseWebpackConfig, {
   },
 
   plugins: [
-
     new webpack.optimize.UglifyJsPlugin({
       output: { comments: false },
       compress: { warnings: false, drop_console: true },
@@ -45,7 +42,7 @@ let webpackConfig = merge(baseWebpackConfig, {
       gifsicle: { optimizationLevel: 3 },
       pngquant: { quality: '65-90', speed: 4 },
       svgo: {
-        plugins: [{ removeUnknownsAndDefaults: false }, { cleanupIDs: false }],
+        plugins: [{ removeUnknownsAndDefaults: false }, { cleanupIDs: false }]
       },
       plugins: [imageminMozjpeg({ quality: 75 })]
     }),
@@ -53,9 +50,13 @@ let webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module, count) {
+      minChunks: function(module, count) {
         // any required modules inside node_modules are extracted to vendor
-        return (module.resource && _CONFIG.extensions.js.test(module.resource) && module.resource.indexOf(_CONFIG.resolve('node_modules')) === 0)
+        return (
+          module.resource &&
+          _CONFIG.extensions.js.test(module.resource) &&
+          module.resource.indexOf(_CONFIG.resolve('node_modules')) === 0
+        );
       }
     }),
 
@@ -64,16 +65,7 @@ let webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
-    }),
-
-    // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: _CONFIG.resolve(_CONFIG.directories.entry.static.replace(/\/$/,'')),
-        to: '',
-        ignore: ['.*']
-      }
-    ])
+    })
   ]
 });
 

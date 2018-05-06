@@ -1,11 +1,11 @@
 {
-  "name": "paragon",
+  "name": "presto",
   "type": "wordpress-theme",
   "license": "MIT",
-  "description": "WordPress starter theme",
+  "description": "A WordPress starter theme",
   "keywords": ["wordpress"],
   "autoload": {
-    "psr-4": {"App\\": "app/classes/theme_config"}
+    "psr-4": { "Presto\\": "app/classes/presto" }
   },
   "config": {
     "vendor-dir": "app/classes/vendor"

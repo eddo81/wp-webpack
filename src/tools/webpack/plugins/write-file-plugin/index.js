@@ -1,14 +1,14 @@
 'use strict';
 
-const _WRITE = require('write');
+const writeFile = require('../../../utils/write-file.js');
 
 function WriteFilePlugin(options = {}) {
-    this.options = options;
+  this.options = options;
 }
 
 WriteFilePlugin.prototype.apply = function(compiler) {
   compiler.plugin('done', () => {
-    _WRITE.sync(this.options.filePath, this.options.fileContents, (error) => { if (error) { throw error; } });
+    writeFile(this.options.filePath, this.options.fileContents);
   });
 };
 

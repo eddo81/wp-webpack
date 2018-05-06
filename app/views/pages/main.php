@@ -1,2 +1,2 @@
-<?php ?>
+<?php  ?>
 <main id="app"></main>

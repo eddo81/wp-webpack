@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import Style      from 'assets/scss/style.scss';
-import Vue        from 'vue';
-import App        from '@/App.vue';
+import Style from 'assets/scss/style.scss';
+import Vue from 'vue';
+import App from '@/App.vue';
 
-import Checkbox   from '@/components/_checkbox.vue';
-import Radio      from '@/components/_radio_btn.vue';
-import Select     from '@/components/_select.vue';
-import Textfield  from '@/components/_textfield.vue';
-import Textarea   from '@/components/_textarea.vue';
+import Checkbox from '@/components/_checkbox.vue';
+import Radio from '@/components/_radio_btn.vue';
+import Select from '@/components/_select.vue';
+import Textfield from '@/components/_textfield.vue';
+import Textarea from '@/components/_textarea.vue';
 
 Vue.config.productionTip = false;
 
@@ -23,4 +23,3 @@ new Vue({
   el: '#app',
   render: h => h(App)
 });
-

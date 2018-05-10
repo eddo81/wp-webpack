@@ -9,6 +9,7 @@ use Presto\Setup\Deregister_Scripts;
 use Presto\Setup\Enqueue_Scripts;
 use Presto\Setup\Move_Scripts;
 use Presto\Setup\Nice_Search;
+use Presto\Setup\Load_Textdomain;
 use Presto\Plugins\ACF;
 
 /**
@@ -28,7 +29,7 @@ class Init extends Config
       return;
     }
 
-    $this->theme_setup();
+    add_action('after_setup_theme', [$this, 'theme_setup']);
 
     self::$loaded = true;
   }
@@ -45,6 +46,7 @@ class Init extends Config
     new Enqueue_Scripts();
     new Move_Scripts();
     new Nice_Search();
+    new Load_Textdomain(self::$text_domain, get_template_directory() . '/languages');
     new ACF();
   }
 

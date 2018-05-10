@@ -110,6 +110,9 @@ const _CONFIG = {
   extensions: _EXTENSIONS,
   package: _PKG,
   server: _SERVER,
+  scss_variables: require('../utils/parse-sass-variables.js')(
+    `./${_DIRECTORIES.entry.scss_variables}_variables.scss`
+  ),
   resources: [].concat(
     ...[
       `./${_DIRECTORIES.entry.scss_variables}`,

@@ -27,10 +27,6 @@ module.exports = {
     }
   },
 
-  devtool: _CONFIG.env.debug ? '#cheap-module-eval-source-map' : '#source-map',
-
-  watch: _CONFIG.env.debug,
-
   module: {
     rules: [
       {
@@ -133,7 +129,8 @@ module.exports = {
           author: _CONFIG.package.author,
           text_domain: _CONFIG.theme.text_domain,
           env: _CONFIG.env,
-          assets: assetsByType
+          assets: assetsByType,
+          scss_variables: _CONFIG.scss_variables
         };
 
         writeFile(

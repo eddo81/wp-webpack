@@ -18,17 +18,38 @@
   {
     /** @var array */
     static $assets = [
-		"js" => ["/app/assets/js/manifest.01c8350fc8d48b48ca4d.js","/app/assets/js/vendor.fbca3399c8ac4ed436b1.js","/app/assets/js/app.0e5434de75a35b5b91b8.js"],
-		"css" => ["/app/assets/css/app.59c86ecce7aa16aec5a1630a2302ac66.css"]
+		"js" => ["/app/assets/js/app.js"],
+		"css" => []
+	];
+
+    /** @var array */
+    static $theme_colors = [
+		"theme-color" => "#F02872",
+		"theme-color--light" => "#ef2e75",
+		"theme-color--dark" => "#f40a61",
+		"accent-color" => "#E91E63",
+		"accent-color--light" => "#e95185",
+		"accent-color--dark" => "#de0f56",
+		"link-color" => "#4076D4",
+		"link-color--hover" => "#003695",
+		"link-color--active" => "#7798d0",
+		"black-color" => "#000",
+		"white-color" => "#FFF",
+		"grey-color" => "#F5F5F5",
+		"grey-color--light" => "#FAFAFA",
+		"grey-color--dark" => "#E0E0E0",
+		"primary-text-color" => "rgba(0, 0, 0, 0.87)",
+		"secondary-text-color" => "rgba(0, 0, 0, 0.54)",
+		"hint-text-color" => "rgba(0, 0, 0, 0.38)",
+		"divider-color" => "rgba(0, 0, 0, 0.12)"
 	];
 
     /** @var array */
     static $environment = [
-		"wp_debug" => false,
-		"wp_env" => "production"
+		"wp_debug" => true,
+		"wp_env" => "development"
 	];
 
     /** @var string */
     static $text_domain = "presto";
-
   }

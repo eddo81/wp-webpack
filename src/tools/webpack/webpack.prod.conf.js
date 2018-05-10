@@ -9,6 +9,8 @@ const { default: ImageminPlugin } = require('imagemin-webpack-plugin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
 let webpackConfig = merge(baseWebpackConfig, {
+  devtool: '#source-map',
+
   module: { rules: utils.styleLoaders({ sourceMap: true, extract: true }) },
 
   output: {

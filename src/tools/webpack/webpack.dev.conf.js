@@ -4,21 +4,29 @@ const _CONFIG = require('../config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-
 const BrowserSyncPlugin = require('browsersync-webpack-plugin');
 
 //add hot-reload related code to entry chunks
-Object.keys(baseWebpackConfig.entry).forEach(function (name) {
-  baseWebpackConfig.entry[name] = [`./${_CONFIG.directories.entry.server}hmr-client`].concat(baseWebpackConfig.entry[name]);
+Object.keys(baseWebpackConfig.entry).forEach(function(name) {
+  baseWebpackConfig.entry[name] = [
+    `./${_CONFIG.directories.entry.server}hmr-client`
+  ].concat(baseWebpackConfig.entry[name]);
 });
 
-baseWebpackConfig.module.rules.forEach(function (rule) {
-  if(rule.test === _CONFIG.extensions.js && Array.isArray(rule.loaders)) {
-    rule.loaders.push(_CONFIG.resolve(`${_CONFIG.directories.entry.plugins}module-hot-accept-plugin`));
+baseWebpackConfig.module.rules.forEach(function(rule) {
+  if (rule.test === _CONFIG.extensions.js && Array.isArray(rule.loaders)) {
+    rule.loaders.push(
+      _CONFIG.resolve(
+        `${_CONFIG.directories.entry.plugins}module-hot-accept-plugin`
+      )
+    );
   }
 });
 
 let webpackConfig = merge(baseWebpackConfig, {
+  devtool: '#cheap-module-eval-source-map',
+
+  watch: true,
 
   module: {
     rules: utils.styleLoaders({
@@ -44,10 +52,9 @@ let webpackConfig = merge(baseWebpackConfig, {
       proxyUrl: _CONFIG.server.proxy_url,
       advanced: {
         browserSync: {
-
           files: [
-            `${_CONFIG.directories.output.app}**/*.php`,
-            `!${_CONFIG.directories.output.classes + _CONFIG.filenames.output.php}`,
+            `${_CONFIG.directories.root}**/*.php`,
+            `!${_CONFIG.directories.output.classes}Config.php`
           ],
 
           ghostMode: {

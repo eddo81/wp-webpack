@@ -4,7 +4,8 @@ module.exports = ({
   author,
   text_domain,
   env,
-  assets
+  assets,
+  scss_variables
 }) => {
   const arguments_list = Object.keys(assets).map(key => ` '${String(key)}'`);
   const template = `<?php
@@ -32,6 +33,18 @@ module.exports = ({
           assets[key]
         ) || []}`
     )}\n\t];
+
+    /** @var array */
+    static $theme_colors = [${Object.keys(scss_variables)
+      .filter(key => {
+        return key.match(/^(.*?(\bcolor\b)[^$]*)$/);
+      })
+      .map(
+        key =>
+          `\n\t\t${JSON.stringify(String(key))} => ${JSON.stringify(
+            scss_variables[key].replace(/\"/g, "'")
+          )}`
+      )}\n\t];
 
     /** @var array */
     static $environment = [\n\t\t"wp_debug" => ${env.debug},\n\t\t"wp_env" => ${

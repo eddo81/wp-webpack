@@ -8,6 +8,7 @@
     <title><?php bloginfo('name'); ?><?php wp_title(); ?></title>
     <meta name="description" content="">
     <link rel="manifest" href="<?= get_bloginfo('url') . '/wp-content/themes/presto/app/assets/manifest.json'; ?>">
+    <?php $setup->preload(); ?>
     <?php wp_head(); ?>
   </head>
   <body>

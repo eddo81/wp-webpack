@@ -7,7 +7,6 @@ namespace Presto\Setup;
  * @package presto
  * @author "eddo81 <eduardo_jonnerstig@live.com>"
  */
-
 class Clean_Markup
 {
 
@@ -27,20 +26,11 @@ class Clean_Markup
     add_filter('the_generator', '__return_false');
   }
 
+  /**
+   * Remove unnecessary <link>'s, self-closing tags and various wordpress specific inlined CSS and JavaScript
+   */
   public function format_wp_head()
   {
-
-    /**
-     * Clean up wp_head()
-     *
-     * Remove unnecessary <link>'s
-     * Remove inline CSS and JS from WP emoji support
-     * Remove inline CSS used by Recent Comments widget
-     * Remove inline CSS used by posts with galleries
-     * Remove self-closing tag
-     *
-     */
-
     remove_action('wp_head', 'feed_links_extra', 3);
     add_action('wp_head', 'ob_start', 1, 0);
     add_action('wp_head', function () {
@@ -67,14 +57,14 @@ class Clean_Markup
     add_filter('show_recent_comments_widget_style', '__return_false');
   }
 
-  public function language_attributes()
+  /**
+   * Clean up language_attributes() used in <html> tag
+   *
+   * Remove dir="ltr"
+   * @return string
+   */
+  public function language_attributes() : string
   {
-    /**
-     * Clean up language_attributes() used in <html> tag
-     *
-     * Remove dir="ltr"
-     */
-
     $attributes = [];
 
     if (is_rtl()) {
@@ -116,13 +106,14 @@ class Clean_Markup
     return str_replace("'", '"', $input);
   }
 
-  public function body_class($classes)
+  /**
+   * Add and remove body_class() classes
+   *
+   * @param mixed $classes
+   * @return array
+   */
+  public function body_class($classes) : array
   {
-
-    /**
-     * Add and remove body_class() classes
-     */
-
   // Add post/page slug if not present
     if (is_single() || is_page() && !is_front_page()) {
       if (!in_array(basename(get_permalink()), $classes)) {

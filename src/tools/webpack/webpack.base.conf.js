@@ -125,8 +125,6 @@ module.exports = {
       assetsByType => {
         const template_variables = {
           class_name: 'Config',
-          package_name: 'presto',
-          author: _CONFIG.package.author,
           text_domain: _CONFIG.theme.text_domain,
           env: _CONFIG.env,
           assets: assetsByType,

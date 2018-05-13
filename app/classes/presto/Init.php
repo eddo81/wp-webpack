@@ -58,4 +58,16 @@ class Init extends Config
   {
     return self::environment;
   }
+
+
+  public static function preload()
+  {
+    foreach (self::$assets as $asset_category => $asset_collection) {
+
+      foreach ($asset_collection as $asset) {
+        $href = get_bloginfo('template_url') . $asset;
+        echo "<link rel='preload' href='{$href}' as='{$asset_category}'>";
+      }
+    }
+  }
 }

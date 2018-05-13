@@ -1,3 +1,4 @@
+const fs = require('fs');
 const favicons = require('favicons');
 const _CONFIG = require('../config');
 
@@ -30,16 +31,30 @@ const options = {
 
 const callback = function(error, response) {
   if (error) {
-    console.log(error.message); // Error description e.g. "An unknown error has occurred"
+    //console.log(error.message); // Error description e.g. "An unknown error has occurred"
     return;
   }
-  console.log(response.images); // Array of { name: string, contents: <buffer> }
-  console.log(response.files); // Array of { name: string, contents: <string> }
-  console.log(response.html); // Array of strings (html elements)
 };
 
 favicons(
   _CONFIG.resolve(_CONFIG.directories.entry.images + 'logo.png'),
   options,
-  callback
+  (error, response) => {
+    if (error) {
+      //console.log(error.message); // Error description e.g. "An unknown error has occurred"
+      return;
+    }
+
+    response.images.forEach(image => {
+      fs.writeFile(
+        _CONFIG.directories.output.images + image.name,
+        image.contents,
+        function(err) {
+          if (err) {
+            return console.log(err);
+          }
+        }
+      );
+    });
+  }
 );

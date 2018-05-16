@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const WriteFilePlugin = require('./plugins/write-file-plugin');
 const SortAssetsPlugin = require('./plugins/sort-assets-plugin');
 const writeFile = require('../utils/write-file.js');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -143,20 +144,24 @@ module.exports = {
       }
     ),
 
-    new WriteFilePlugin({
-      filePath: _CONFIG.resolve(
-        _CONFIG.directories.output.assets + 'manifest.json'
-      ),
-      fileContents: require('./plugins/write-file-plugin/templates/manifest-template.js')(
-        _CONFIG.theme
-      )
-    }),
+    // new WriteFilePlugin({
+    //   filePath: _CONFIG.resolve(
+    //     _CONFIG.directories.output.assets + 'manifest.json'
+    //   ),
+    //   fileContents: require('./plugins/write-file-plugin/templates/manifest-template.js')(
+    //     _CONFIG.theme
+    //   )
+    // }),
 
     new WriteFilePlugin({
       filePath: _CONFIG.resolve('style.css'),
       fileContents: require('./plugins/write-file-plugin/templates/style-css-template.js')(
         _CONFIG.theme
       )
-    })
+    }),
+
+    new FaviconsWebpackPlugin(
+      _CONFIG.resolve(_CONFIG.directories.entry.images + 'logo.png')
+    )
   ]
 };

@@ -19,13 +19,9 @@
     /** @var array */
     static $assets = [
 			"script" => [
-				"/app/assets/js/manifest.01c8350fc8d48b48ca4d.js",
-				"/app/assets/js/vendor.fbca3399c8ac4ed436b1.js",
-				"/app/assets/js/app.0e5434de75a35b5b91b8.js"
+				"/app/assets/js/app.js"
 			],
-			"style" => [
-				"/app/assets/css/app.59c86ecce7aa16aec5a1630a2302ac66.css"
-			]
+			"style" => []
 		];
 
     /** @var array */
@@ -87,8 +83,8 @@
 
     /** @var array */
     static $environment = [
-			"wp_debug" => false,
-			"wp_env" => "production"
+			"wp_debug" => true,
+			"wp_env" => "development"
 		];
 
     /** @var string */

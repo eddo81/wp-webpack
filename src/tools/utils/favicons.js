@@ -47,7 +47,7 @@ favicons(
 
     response.images.forEach(image => {
       fs.writeFile(
-        _CONFIG.directories.output.images + image.name,
+        _CONFIG.resolve(_CONFIG.directories.output.assets),
         image.contents,
         function(err) {
           if (err) {

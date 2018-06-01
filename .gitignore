@@ -1,8 +1,0 @@
-.DS_Store
-.vscode
-node_modules/
-app/assets/
-app/classes/vendor/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*

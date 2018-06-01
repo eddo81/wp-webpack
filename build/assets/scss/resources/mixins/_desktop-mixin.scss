@@ -1,0 +1,14 @@
+/**
+ * _desktop-mixin.scss
+ * ===================
+ *
+ */
+
+@mixin desktop() {
+
+  @if $use-desktop-mixin == true {
+      @media(min-width: get_breakpoint("lg")) { 
+      @content;
+    }
+  }
+}

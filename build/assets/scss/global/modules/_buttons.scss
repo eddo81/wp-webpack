@@ -1,0 +1,65 @@
+/*
+
+Buttons
+
+Buttons and their variations
+
+Markup:
+<a href="#" class="button--{{modifier_class}}">Button</a>
+
+.button--theme       - A link that's sized like a button
+.button--link        - A link that's sized like a button
+
+Styleguide 2.0
+
+*/
+
+.button--theme {
+  background-color: $theme-color;
+  border-color: $theme-color;
+  color: $white-color;
+
+  &:link, &:visited {
+    color: $white-color;
+  }
+
+  &:focus, &:hover {
+    background-color: $theme-color--dark;
+    color: $white-color;
+  }
+
+  &:active {
+    background-color: $theme-color--light;
+    color: $white-color;
+  }
+
+  &.button--shadow {
+    @include btn-shadow($theme-color);
+  }
+}
+
+.button {
+  @extend %btn;
+
+  background-color: transparent;
+  color: $link-color;
+  border-color: transparent;
+
+  &:link, &:visited {
+    color: $link-color;
+  }
+
+  &:focus, &:hover {
+    color: $link-color--hover;
+    background-color: transparent;
+  }
+
+  &:active {
+    color: $link-color--active;
+    background-color: transparent;
+  }
+}
+
+.button--shadow {
+  @include btn-shadow();
+}

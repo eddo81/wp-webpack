@@ -1,0 +1,110 @@
+const fs = require('fs');
+const _PATH = require('path');
+const _ROOT = `${_PATH.resolve(_PATH.join(__dirname, '../../../'))}/`;
+const _PKG = require(`${_ROOT}package.json`);
+const _ENV = new function() {
+  this.debug =
+    (process.env.NODE_ENV || 'development').trim().toLowerCase() !==
+    'production'
+      ? true
+      : false;
+  this.mode = this.debug === true ? '"development"' : '"production"';
+}();
+
+const _DIRECTORIES = {
+  root: _ROOT,
+
+  entry: new function() {
+    // Root
+    this.build = 'build/';
+    this.tools = `${this.build}tools/`;
+    this.assets = `${this.build}assets/`;
+
+    // Tools
+    this.webpack = `${this.tools}webpack/`;
+    this.plugins = `${this.webpack}plugins/`;
+
+    // Assets
+    this.images = `${this.assets}images/`;
+    this.media = `${this.assets}media/`;
+    this.fonts = `${this.assets}fonts/`;
+    this.scripts = `${this.assets}scripts/`;
+    this.scss = `${this.assets}scss/`;
+    this.icons = `${this.static}img/icons/`;
+  }(),
+
+  output: new function() {
+    this.app = `app/`;
+    this.assets = `${this.app}assets/`;
+    this.classes = `${this.app}classes/presto/`;
+    this.js = `js/`;
+    this.css = `css/`;
+    this.media = `media/`;
+    this.fonts = `fonts/`;
+    this.images = `img/`;
+    this.icons = `${this.images}icons/`;
+  }()
+};
+
+const _FILENAMES = {
+  entry: new function() {
+    this.js = `main.js`;
+    this.scss = `style.scss`;
+    this.webpack_config = `webpack.${_ENV.debug ? 'dev' : 'prod'}.conf.js`;
+  }(),
+
+  output: new function() {
+    this.js = `bundle.js`;
+    this.css = `style.css`;
+  }()
+};
+
+const _EXTENSIONS = {
+  js: /\.(js|es6)$/i,
+  css: /\.css$/i,
+  scss: /\.s[a|c]ss$/i,
+  postcss: /\.postcss$/i,
+  text: /\.(xml|txt)(\?.*)?$/i,
+  images: /\.(png|jpe?g|gif|svg|tiff|bmp|ico)(\?.*)?$/i,
+  media: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i,
+  video: /\.(mp4|webm|ogg)(\?.*)?$/i,
+  audio: /\.(mp3|wav|flac|aac)(\?.*)?$/i,
+  fonts: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+  json: /\.json$/i,
+  html: /\.html$/i
+};
+
+const _THEME = new function() {
+  this.name = 'Gronaklustret';
+  this.description = 'A modern WordPress starter theme.';
+  this.uri = '';
+  this.version = '1.0.0';
+  this.author = '';
+  this.author_uri = '';
+  this.text_domain = this.name.toLowerCase();
+}();
+
+const _SERVER = new function() {
+  this.autoOpenBrowser = true;
+  this.port = 3000;
+  this.dev_url = `http://gronaklustret.test:8080/`;
+  this.proxy_url = `http://localhost:${this.port}`;
+  this.public_path = `/wp-content/themes/${_THEME.name}/${
+    _DIRECTORIES.output.assets
+  }`; // Path to theme root (/wp-content/themes/my-theme/)
+}();
+
+const _CONFIG = {
+  theme: _THEME,
+  env: _ENV,
+  directories: _DIRECTORIES,
+  filenames: _FILENAMES,
+  extensions: _EXTENSIONS,
+  package: _PKG,
+  server: _SERVER,
+  resolve: function(dir = '') {
+    return _PATH.join(_DIRECTORIES.root, dir);
+  }
+};
+
+module.exports = _CONFIG;

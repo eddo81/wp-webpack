@@ -1,0 +1,74 @@
+/**
+ * _textfield_select-placeholder.scss
+ * ==================================
+ *
+ */
+
+%textfield-select__height {
+  height: (($baseline * 2) + ($border-width * 2));
+
+  @include desktop() {
+    height: (($baseline * 2) + ($border-width * 1.6));
+  }
+}
+
+%textarea__height {
+  resize: vertical;
+  min-height: (($baseline * 3) + ($border-width * 2));
+  max-height: (($baseline * 12) + ($border-width * 2));
+
+  @include desktop() {
+    min-height: (($baseline * 3) + ($border-width * 1.6));
+    max-height: (($baseline * 12) + ($border-width * 1.6));
+  }      
+
+  @include ie() {
+    height: (($baseline * 12) + ($border-width * 1.6));
+  }
+}
+
+%textfield-select__shape {
+  background-color: $white-color;
+  border: $border-width solid $hint-text-color;
+  border-radius: $border-radius--sm;
+  box-sizing: border-box;
+  padding: (($baseline / 2.4) + ($baseline / 3)) ($baseline / 4.8) ($baseline / 4);
+  position: relative;
+  width: 100%;  
+
+  @include desktop() {
+    border-width: ($border-width * 0.8);
+  }
+}
+
+%textfield-select__container {
+  display: block;
+  margin-top: (($baseline / 12) * -1);
+  margin-bottom: $baseline;
+  position: relative;
+
+  @include desktop() {
+    margin-top: (($baseline / 15) * -1);
+  }
+}
+
+%textfield-select__label {
+  font-size: $font-size--sm;
+  color: $secondary-text-color;
+  position: absolute;
+  left: 1px;
+  line-height: 1;
+  padding: ($baseline / 4.8);
+  right: 1px;
+  top: 1px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+}
+
+%textfield-select__focus {
+  border-color: $theme-color;
+  box-shadow: 0 1px 2px 0 $divider-color inset;
+  outline: none;
+}

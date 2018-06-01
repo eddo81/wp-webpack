@@ -1,0 +1,17 @@
+/**
+ * _breakpoint-function.scss
+ * =========================
+ *
+ */
+
+@function get_breakpoint($breakpoint) {
+  $breakpoint-map: ("xs": $screen--xs, "sm": $screen--sm, "md": $screen--md, "lg": $screen--lg, "xl": $screen--xl);
+
+  @if type-of($breakpoint) == 'string' and map-has-key($breakpoint-map, $breakpoint) {
+    @return #{map-get($breakpoint-map, $breakpoint)}
+  }
+
+  @else {
+    @error "Invalid argument: `#{$breakpoint}`. Please provide a vaild string value that matches a key in the `$breakpoint-map`: `#{map-keys($breakpoint-map)}`.";
+  }
+}

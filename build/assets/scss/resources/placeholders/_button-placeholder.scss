@@ -1,0 +1,34 @@
+/**
+ * _button-placeholder.scss
+ * ========================
+ *
+ */
+
+%btn {
+  overflow: visible;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  letter-spacing: inherit;
+  background: none;
+  background-color: $white-color;
+  border: $border-width solid $hint-text-color;
+  color: $secondary-text-color;
+  border-radius: $border-radius--sm;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block !important;
+  height: ($baseline * 2);
+  line-height: ($baseline * 2);
+  max-width: 100%;
+  transition-property: background-color;
+  transition-duration: get_duration("short");
+  margin: 0 auto;
+  padding: 0 ($baseline * 1.25);
+  text-align: center;
+  user-select: none;
+  width: auto;
+
+  @include desktop() {
+    border-width: ($border-width * 0.8);
+  }
+}

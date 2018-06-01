@@ -1,0 +1,17 @@
+/**
+ * _duration-function.scss
+ * =======================
+ *
+ */
+
+@function get_duration($duration) {
+  $duration-map: ("short": $duration--short, "medium": $duration--medium, "long": $duration--long);
+
+  @if type-of($duration) == 'string' and map-has-key($duration-map, $duration) {
+    @return #{map-get($duration-map, $duration)}
+  }
+
+  @else {
+    @error "Invalid argument: `#{$duration}`. Please provide a vaild string value that matches a key in the `$duration-map`: `#{map-keys($duration-map)}`.";
+  }    
+}

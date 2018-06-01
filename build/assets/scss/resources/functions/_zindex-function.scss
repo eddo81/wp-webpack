@@ -1,0 +1,17 @@
+/**
+ * _zindex-function.scss
+ * =====================
+ *
+ */
+
+@function get_zindex($index) {
+  $z-index-list: (-1, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000);
+
+  @if type-of($index) == 'number' and length($z-index-list) >= $index {
+    @return #{nth($z-index-list, $index)}
+  }
+
+  @else {
+    @error "Invalid argument: `#{$index}`. Please provide a numeric value between `1` and `#{length($z-index-list)}`.";
+  }    
+}
